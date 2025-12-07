@@ -445,7 +445,7 @@ export default function NosotrosPage() {
           </p>
           <div className="flex items-center gap-4">
             <div>
-              <p className="font-bold text-gray-900">Teodoro García</p>
+              <p className="font-bold text-gray-900">José Luis Rosas Marcos.</p>
               <p className="text-gray-600">Fundador - 20 años fabricando</p>
             </div>
           </div>
@@ -559,28 +559,31 @@ export default function NosotrosPage() {
       </div>
     </div>
     
-    {/* Nota de seguridad */}
-    <div className="mt-16 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="bg-green-500/20 p-3 rounded-lg">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-          </div>
-          <div>
-            <h4 className="font-bold text-lg">Empresa 100% Legal y Establecida</h4>
-            <p className="text-gray-400 text-sm">
-              RFC válido, facturación electrónica, cumplimiento de normas oficiales
-            </p>
-          </div>
-        </div>
-        <a 
-          href="mailto:ventasiga.lockers@gmail.com"
-          className="px-6 py-3 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-colors"
-        >
-          Solicitar RFC y datos fiscales
-        </a>
+   {/* Nota de seguridad */}
+<div className="mt-16 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6">
+  <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+    <div className="flex items-center gap-4">
+      <div className="bg-green-500/20 p-3 rounded-lg">
+        <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+      </div>
+      <div>
+        <h4 className="font-bold text-lg">Empresa 100% Legal y Establecida</h4>
+        <p className="text-gray-400 text-sm">
+          RFC válido, facturación electrónica, cumplimiento de normas oficiales
+        </p>
       </div>
     </div>
+    <a 
+      href="https://wa.me/525518246146?text=Hola%20JGA%20México,%20necesito%20solicitar%20su%20RFC%20y%20datos%20fiscales%20completos%20para%20proceso%20de%20compra.%20¿Podrían%20enviármelos%20por%20favor?"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-6 py-3 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition-colors flex items-center gap-2"
+    >
+      <FaWhatsapp className="text-green-400" />
+      Solicitar RFC y datos fiscales
+    </a>
+  </div>
+</div>
   </div>
 </div>
 {/* SECCIÓN 6: CTA FINAL */}

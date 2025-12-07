@@ -3,6 +3,8 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { FaWhatsapp, FaArrowRight, FaIndustry } from 'react-icons/fa'; // 👈 AGREGAR FaIndustry
+
 import { 
   FaBuilding, 
   FaHotel, 
@@ -447,12 +449,17 @@ const ClientsSection = () => {
               COTIZAR PARA MI EMPRESA
             </a>
             
-            <a 
-              href="/casos-exito"
-              className="border-2 border-black hover:border-brand-red text-black hover:text-brand-red font-bold px-8 py-4 rounded-lg transition-colors flex items-center gap-3 justify-center"
-            >
-              VER MÁS CASOS DE ÉXITO
-            </a>
+            <button
+  onClick={() => {
+    if (window.confirm("Actualmente estamos actualizando nuestros casos de éxito más recientes.\n\n¿Te gustaría conocer nuestra historia completa, ver fotos reales de nuestra fábrica y entender por qué más de 500 clientes confían en nosotros?")) {
+      window.location.href = "/nosotros";
+    }
+  }}
+  className="border-2 border-black hover:border-brand-red text-black hover:text-brand-red font-bold px-8 py-4 rounded-lg transition-colors flex items-center gap-3 justify-center group"
+>
+  <FaIndustry className="group-hover:scale-110 transition-transform" />
+  CONOCER AL FABRICANTE
+</button>
           </div>
         </div>
       </div>

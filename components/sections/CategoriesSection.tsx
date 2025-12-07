@@ -1,4 +1,3 @@
-// components/sections/CategoriesSection.tsx
 'use client';
 
 import Image from 'next/image';
@@ -13,7 +12,8 @@ import {
   FaShoppingBag,
   FaBuilding,
   FaCheckCircle,
-  FaQuoteLeft
+  FaQuoteLeft,
+  FaWhatsapp
 } from 'react-icons/fa';
 
 const CategoriesSection = () => {
@@ -36,7 +36,8 @@ const CategoriesSection = () => {
         "Resistencia certificada",
         "Garantía 5 años estructura",
         "Normas industriales"
-      ]
+      ],
+      whatsappMessage: "Hola%20JGA%20México,%20me%20interesan%20los%20LOCKERS%20METÁLICOS%20industriales%20del%20catálogo.%20¿Podrían%20darme%20más%20información%20técnica%20y%20cotización?"
     },
     {
       id: 2,
@@ -55,7 +56,8 @@ const CategoriesSection = () => {
         "Cero mantenimiento",
         "Ligero y modular",
         "Higiénico y lavable"
-      ]
+      ],
+      whatsappMessage: "Hola%20JGA%20México,%20me%20interesan%20los%20LOCKERS%20DE%20PVC%20para%20zonas%20húmedas%20del%20catálogo.%20¿Podrían%20darme%20más%20información%20y%20cotización?"
     },
     {
       id: 3,
@@ -74,83 +76,84 @@ const CategoriesSection = () => {
         "Diseño personalizable",
         "Calidad hotelera",
         "Instalación profesional"
-      ]
+      ],
+      whatsappMessage: "Hola%20JGA%20México,%20me%20interesan%20los%20LOCKERS%20DE%20MADERA/MDF%20premium%20del%20catálogo.%20¿Podrían%20darme%20más%20información%20y%20cotización?"
     }
   ];
 
-  // Industrias/sectores
-  const industries = [
-    {
-      id: 1,
-      name: "Minería e Industria",
-      icon: FaIndustry,
-      color: "bg-gray-800",
-      textColor: "text-gray-800",
-      link: "/soluciones/mineria",
-      description: "Lockers para uso extremo",
-      stat: "Resistencia máxima"
-    },
-    {
-      id: 2,
-      name: "Escuelas y Universidades",
-      icon: FaSchool,
-      color: "bg-blue-600",
-      textColor: "text-blue-600",
-      link: "/soluciones/escuelas",
-      description: "Gaveteros escolares",
-      stat: "+500 casilleros"
-    },
-    {
-      id: 3,
-      name: "Hospitales y Clínicas",
-      icon: FaHospital,
-      color: "bg-teal-600",
-      textColor: "text-teal-600",
-      link: "/soluciones/salud",
-      description: "Locker sanitarios",
-      stat: "Higiéno total"
-    },
-    {
-      id: 4,
-      name: "Gimnasios y Clubes",
-      icon: FaDumbbell,
-      color: "bg-red-600",
-      textColor: "text-red-600",
-      link: "/soluciones/gimnasios",
-      description: "Lockers ventilados",
-      stat: "Ventilación 360°"
-    },
-    {
-      id: 5,
-      name: "Hoteles y Spas",
-      icon: FaHotel,
-      color: "bg-amber-600",
-      textColor: "text-amber-600",
-      link: "/soluciones/hoteles",
-      description: "Lockers de lujo",
-      stat: "Diseño premium"
-    },
-    {
-      id: 6,
-      name: "Comercios y Retail",
-      icon: FaShoppingBag,
-      color: "bg-purple-600",
-      textColor: "text-purple-600",
-      link: "/soluciones/comercios",
-      description: "Para empleados",
-      stat: "Acceso controlado"
-    },
-    {
-      id: 7,
-      name: "Oficinas Corporativas",
-      icon: FaBuilding,
-      color: "bg-indigo-600",
-      textColor: "text-indigo-600",
-      link: "/soluciones/oficinas",
-      description: "Diseño ejecutivo",
-      stat: "Seguridad alta"
-    }
-  ];
+  // Industrias/sectores - ACTUALIZADO PARA IR AL CATÁLOGO
+const industries = [
+  {
+    id: 1,
+    name: "Minería e Industria",
+    icon: FaIndustry,
+    color: "bg-gray-800",
+    textColor: "text-gray-800",
+    link: "/catalogo?industria=mineria", // ← CORREGIDO
+    description: "Lockers para uso extremo",
+    stat: "Resistencia máxima"
+  },
+  {
+    id: 2,
+    name: "Escuelas y Universidades",
+    icon: FaSchool,
+    color: "bg-blue-600",
+    textColor: "text-blue-600",
+    link: "/catalogo?industria=educacion", // ← CORREGIDO
+    description: "Gaveteros escolares",
+    stat: "+500 casilleros"
+  },
+  {
+    id: 3,
+    name: "Hospitales y Clínicas",
+    icon: FaHospital,
+    color: "bg-teal-600",
+    textColor: "text-teal-600",
+    link: "/catalogo?industria=salud", // ← CORREGIDO
+    description: "Locker sanitarios",
+    stat: "Higiéno total"
+  },
+  {
+    id: 4,
+    name: "Gimnasios y Clubes",
+    icon: FaDumbbell,
+    color: "bg-red-600",
+    textColor: "text-red-600",
+    link: "/catalogo?industria=deportes", // ← CORREGIDO
+    description: "Lockers ventilados",
+    stat: "Ventilación 360°"
+  },
+  {
+    id: 5,
+    name: "Hoteles y Spas",
+    icon: FaHotel,
+    color: "bg-amber-600",
+    textColor: "text-amber-600",
+    link: "/catalogo?industria=hoteles", // ← CORREGIDO
+    description: "Lockers de lujo",
+    stat: "Diseño premium"
+  },
+  {
+    id: 6,
+    name: "Comercios y Retail",
+    icon: FaShoppingBag,
+    color: "bg-purple-600",
+    textColor: "text-purple-600",
+    link: "/catalogo?industria=comercios", // ← CORREGIDO
+    description: "Para empleados",
+    stat: "Acceso controlado"
+  },
+  {
+    id: 7,
+    name: "Oficinas Corporativas",
+    icon: FaBuilding,
+    color: "bg-indigo-600",
+    textColor: "text-indigo-600",
+    link: "/catalogo?industria=oficinas", // ← CORREGIDO
+    description: "Diseño ejecutivo",
+    stat: "Seguridad alta"
+  }
+];
 
   // Testimonio ficticio (puedes reemplazar con reales después)
   const testimonial = {
@@ -158,6 +161,13 @@ const CategoriesSection = () => {
     author: "Ing. Carlos Mendoza",
     position: "Gerente de Planta, Minera del Norte",
     industry: "Minería"
+  };
+
+  // Función para manejar click en "Ver proceso de fabricación"
+  const handleProcessClick = () => {
+    if (window.confirm("🎬 ¡Pronto tendremos un video exclusivo de nuestro proceso industrial en la fábrica de Chicoloapan!\n\n¿Te gustaría visitar nuestra sección 'Nosotros' para ver fotos reales de nuestra planta y equipo?")) {
+      window.location.href = "/nosotros";
+    }
   };
 
   return (
@@ -261,7 +271,7 @@ const CategoriesSection = () => {
                   </div>
                 </div>
 
-                {/* CTA - SIN PRECIO, CON VALOR */}
+                {/* CTA - WHATSAPP DIRECTO */}
                 <div className="pt-6 border-t border-gray-100">
                   <div className="flex items-center justify-between">
                     <div>
@@ -270,13 +280,16 @@ const CategoriesSection = () => {
                         Directo de nuestra planta
                       </div>
                     </div>
-                    <Link 
-                      href={`${material.link}?tipo=fabricante`}
-                      className="group/btn inline-flex items-center gap-2 bg-black hover:bg-brand-red text-white font-bold px-6 py-3 rounded-lg transition-all duration-300"
+                    <a 
+                      href={`https://wa.me/525518246146?text=${material.whatsappMessage}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/btn inline-flex items-center gap-2 bg-black hover:bg-green-600 text-white font-bold px-6 py-3 rounded-lg transition-all duration-300"
                     >
-                      Cotizar con fabricante
+                      <FaWhatsapp className="text-green-400 group-hover/btn:text-white" />
+                      Cotizar por WhatsApp
                       <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -377,7 +390,7 @@ const CategoriesSection = () => {
             
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
-                href="https://wa.me/5215518246146?text=Hola%20Lockers%20JGA,%20soy%20fabricante%20y%20quiero%20cotizar%20un%20proyecto%20personalizado"
+                href="https://wa.me/525518246146?text=Hola%20JGA%20México,%20soy%20fabricante%20y%20quiero%20cotizar%20un%20proyecto%20personalizado%20de%20lockers."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-brand-red hover:bg-red-700 text-white font-bold px-8 py-3 rounded-lg transition-colors flex items-center gap-2 justify-center"
@@ -386,13 +399,13 @@ const CategoriesSection = () => {
                 COTIZAR COMO FABRICANTE
               </a>
               
-              <Link 
-                href="/proceso-fabricacion"
+              <button 
+                onClick={handleProcessClick}
                 className="border-2 border-white hover:border-brand-red text-white hover:text-brand-red font-bold px-8 py-3 rounded-lg transition-colors flex items-center gap-2 justify-center"
               >
                 <FaCheckCircle />
                 VER PROCESO DE FABRICACIÓN
-              </Link>
+              </button>
             </div>
           </div>
           

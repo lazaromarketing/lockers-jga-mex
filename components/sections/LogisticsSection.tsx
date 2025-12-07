@@ -1,6 +1,8 @@
 'use client';
 
 import { FaTruck, FaShieldAlt, FaClock, FaMapMarkerAlt, FaCheckCircle } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa';
+
 import Image from 'next/image';
 
 export default function LogisticsSection() {
@@ -222,27 +224,45 @@ export default function LogisticsSection() {
               </div>
               
               <div className="max-w-md mx-auto">
-                <form className="space-y-4">
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    <input
-                      type="text"
-                      placeholder="Ingresa tu Código Postal"
-                      className="flex-1 px-5 py-4 rounded-xl bg-gray-800 border-2 border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 text-lg"
-                      maxLength={5}
-                    />
-                    <button
-                      type="submit"
-                      className="px-8 py-4 bg-gradient-to-r from-brand-red to-red-700 text-white font-bold rounded-xl hover:from-red-700 hover:to-brand-red transition-all duration-300 text-lg shadow-lg hover:shadow-xl hover:transform hover:-translate-y-1"
-                    >
-                      CONSULTAR
-                    </button>
-                  </div>
-                  <p className="text-gray-400 text-sm pt-2">
-                    <span className="text-brand-red font-bold">Respuesta en 15 minutos</span> con tiempo exacto de entrega y cotización completa.
-                  </p>
-                </form>
-              </div>
-
+  <form 
+    onSubmit={(e) => {
+      e.preventDefault();
+      const input = e.currentTarget.querySelector('input[type="text"]') as HTMLInputElement;
+      const zipCode = input.value;
+      
+      if (zipCode.length === 5 && /^\d{5}$/.test(zipCode)) {
+        const message = `Hola JGA México, quiero consultar logística para mi código postal: ${zipCode}. ¿Podrían darme tiempo de entrega y cotización?`;
+        const whatsappUrl = `https://wa.me/525518246146?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+      } else {
+        alert('Por favor ingresa un código postal válido de 5 dígitos.');
+      }
+    }} 
+    className="space-y-4"
+  >
+    <div className="flex flex-col sm:flex-row gap-3">
+      <input
+        type="text"
+        placeholder="Ingresa tu Código Postal"
+        className="flex-1 px-5 py-4 rounded-xl bg-gray-800 border-2 border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 text-lg"
+        maxLength={5}
+        pattern="\d{5}"
+        title="Código postal de 5 dígitos"
+        required
+      />
+      <button
+        type="submit"
+        className="px-8 py-4 bg-gradient-to-r from-brand-red to-red-700 text-white font-bold rounded-xl hover:from-red-700 hover:to-brand-red transition-all duration-300 text-lg shadow-lg hover:shadow-xl hover:transform hover:-translate-y-1 flex items-center gap-2 justify-center"
+      >
+        <FaWhatsapp className="text-xl" />
+        CONSULTAR
+      </button>
+    </div>
+    <p className="text-gray-400 text-sm pt-2">
+      <span className="text-brand-red font-bold">Respuesta en 15 minutos</span> con tiempo exacto de entrega y cotización completa.
+    </p>
+  </form>
+</div>
               {/* Garantía adicional */}
               <div className="mt-8 pt-6 border-t border-gray-800">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-gray-400">
