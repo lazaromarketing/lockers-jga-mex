@@ -1,7 +1,8 @@
 // components/sections/HeroSection.tsx
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaWhatsapp, FaDownload, FaShieldAlt, FaIndustry, FaTruck } from 'react-icons/fa';
+import { FaWhatsapp, FaDownload, FaShieldAlt, FaIndustry, FaTruck, FaBacteria } from 'react-icons/fa';
+import { MdOutlineCleaningServices } from 'react-icons/md';
 
 const HeroSection = () => {
   return (
@@ -11,132 +12,123 @@ const HeroSection = () => {
         <div className="absolute inset-0 opacity-5 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMzAgMTVMMTUgMzBsMTUgMTUgMTUtMTUtMTUtMTV6IiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkYiIHN0cm9rZS13aWR0aD0iMC41Ii8+PHBhdGggZD0iTTAgMGg2MHY2MEgweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGIiBzdHJva2Utd2lkdGg9IjAuNSIvPjwvc3ZnPg==')]"></div>
       </div>
 
-      {/* Línea decorativa roja */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-brand-red to-transparent z-10"></div>
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* COLUMNA IZQUIERDA - CONTENIDO */}
           <div className="text-left">
-            {/* Badge superior */}
+            {/* Badge superior - ENFOCADO EN PVC */}
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-gray to-gray-900 border border-gray-800 rounded-full px-4 py-2 mb-6 lg:mb-8">
-              <FaTruck className="text-brand-red text-sm" />
+              <MdOutlineCleaningServices className="text-brand-red text-sm" />
               <span className="text-white text-sm font-medium tracking-wide">
-                ENVÍOS SEGUROS A TODO MÉXICO 🇲🇽
+                100% ASÉPTICO | CERO CORROSIÓN EN PVC
               </span>
             </div>
 
-            {/* Título H1 - El Gancho */}
+            {/* Título H1 - Corto y Directo (Sin línea roja extra) */}
             <h1 className="font-oswald font-bold text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight uppercase mb-4 lg:mb-6">
-              FABRICANTES{' '}
-              <span className="relative">
-                DE VERDAD.
-                <span className="absolute -bottom-2 left-0 w-full h-1 bg-brand-red"></span>
-              </span>
+              LOCKERS JGA
               <br />
-              <span className="text-gray-300">CALIDAD QUE PESA.</span>
+              <span className="text-brand-red">ACERO Y PVC</span>
+              <br />
+              FABRICANTES REALES
             </h1>
 
-            {/* Subtítulo - La Historia */}
+            {/* Subtítulo - PVC principal, Acero secundario */}
             <p className="text-gray-300 font-roboto text-lg sm:text-xl md:text-2xl leading-relaxed mb-8 lg:mb-10 max-w-3xl">
-              Deja de tratar con revendedores. En{' '}
-              <span className="text-white font-semibold">Lockers JGA</span>{' '}
-              fabricamos desde 2004 la solución definitiva en acero, madera y PVC.{' '}
-              <span className="text-brand-red font-semibold">Robustez industrial garantizada por 5 años.</span>
+              Expertos en <span className="text-brand-red font-semibold">PVC Industrial 16mm</span> (Aséptico/Antihongos) y <span className="text-white font-semibold">Acero Calibre 24</span>. 
+              Resistencia garantizada por 5 años.
             </p>
 
             {/* Botones de CTA */}
             <div className="flex flex-col sm:flex-row gap-4 mb-10 lg:mb-12">
-              {/* Botón Principal - WhatsApp */}
+              {/* Botón Principal */}
               <a
-                href="https://wa.me/5215518246146?text=Hola%20Lockers%20JGA,%20quiero%20cotizar%20directo%20con%20fábrica"
+                href="https://wa.me/5215518246146?text=Hola%20Lockers%20JGA,%20quiero%20cotizar%20PVC%20o%20Acero%20directo%20con%20fábrica"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-3 bg-brand-red hover:bg-red-700 text-white font-bold font-oswald text-lg sm:text-xl px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-900/50 uppercase tracking-wider"
               >
                 <FaWhatsapp className="text-xl" />
-                COTIZAR DIRECTO CON FÁBRICA
+                COTIZAR DIRECTO
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
 
-              {/* Botón Secundario - Catálogo */}
+              {/* Botón Secundario */}
               <Link
                 href="/catalogo"
                 className="group inline-flex items-center justify-center gap-3 border-2 border-white hover:border-brand-red text-white hover:text-brand-red font-bold font-oswald text-lg sm:text-xl px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] uppercase tracking-wider"
               >
                 <FaDownload />
-                VER CATÁLOGO 2025
+                VER CATÁLOGO
               </Link>
             </div>
 
-            {/* Llamada de atención adicional */}
+            {/* Llamada de atención - PVC Hook */}
             <div className="bg-gray-900/50 border-l-4 border-brand-red p-4 rounded-r-lg mb-10">
               <p className="text-gray-200 font-roboto text-sm">
-                <span className="font-bold text-white">¿Hablas con revendedores?</span>{' '}
-                Recibes precios inflados y productos genéricos. Nosotros te damos{' '}
-                <span className="text-brand-red font-bold">acero calibre 24 real</span>{' '}
-                y asesoría técnica directa del fabricante.
+                <span className="font-bold text-white">¿Higiene o Carga Pesada?</span>{' '}
+                Tenemos ambas: <span className="text-brand-red font-bold">PVC Inoxidable</span> sellado con silicón antihongos para zonas húmedas, y Acero reforzado para uso rudo.
               </p>
             </div>
 
-            {/* Barra de Confianza Inferior */}
+            {/* Barra de Confianza - Prioridad PVC */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-gray-800">
+              {/* PVC */}
+              <div className="flex items-center gap-3">
+                <div className="bg-brand-red/20 p-2 rounded-lg">
+                  <MdOutlineCleaningServices className="text-brand-red text-xl" />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-lg">PVC 16mm</p>
+                  <p className="text-gray-400 text-sm">Cero Corrosión</p>
+                </div>
+              </div>
+
+              {/* Acero */}
               <div className="flex items-center gap-3">
                 <div className="bg-brand-red/20 p-2 rounded-lg">
                   <FaIndustry className="text-brand-red text-xl" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-lg">+20 Años</p>
-                  <p className="text-gray-400 text-sm">Experiencia</p>
+                  <p className="text-white font-bold text-lg">Acero C-24</p>
+                  <p className="text-gray-400 text-sm">Máxima Solidez</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="bg-brand-red/20 p-2 rounded-lg">
-                  <svg className="w-6 h-6 text-brand-red" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-white font-bold text-lg">Acero Calibre 24</p>
-                  <p className="text-gray-400 text-sm">Material Premium</p>
-                </div>
-              </div>
-
+              {/* Garantía */}
               <div className="flex items-center gap-3">
                 <div className="bg-brand-red/20 p-2 rounded-lg">
                   <FaShieldAlt className="text-brand-red text-xl" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-lg">Norma ISO/NOM</p>
-                  <p className="text-gray-400 text-sm">Certificados</p>
+                  <p className="text-white font-bold text-lg">5 Años</p>
+                  <p className="text-gray-400 text-sm">Garantía Real</p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* COLUMNA DERECHA - IMAGEN HERO */}
+          {/* COLUMNA DERECHA - IMAGEN ORIGINAL */}
           <div className="relative lg:pl-8 xl:pl-12">
-            {/* Contenedor de imagen con efectos */}
             <div className="relative">
               {/* Efecto de brillo */}
               <div className="absolute -inset-4 bg-gradient-to-r from-transparent via-brand-red/10 to-transparent blur-2xl opacity-50"></div>
               
               {/* Marco industrial */}
               <div className="relative border-2 border-gray-800 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-900 to-black p-2 shadow-2xl">
-                {/* Imagen principal - REEMPLAZA CON TU IMAGEN */}
+                {/* Imagen Original */}
                 <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] rounded-xl overflow-hidden">
                   <Image
                     src="/images/hero-locker-industrial.png"
-                    alt="Locker Industrial JGA - Fabricación Mexicana de Alta Calidad"
+                    alt="Locker Industrial JGA - Acero y PVC"
                     fill
                     className="object-contain"
                     priority
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                   
-                  {/* Overlay de gradiente */}
+                  {/* Overlay sutil */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
                 </div>
 
@@ -145,10 +137,6 @@ const HeroSection = () => {
                   HECHO EN MÉXICO
                 </div>
               </div>
-
-              {/* Elementos decorativos flotantes */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-brand-red/30 rounded-full"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 border-2 border-gray-700 rounded-full"></div>
             </div>
 
             {/* Indicador de scroll */}
