@@ -28,11 +28,13 @@ export default function CatalogoPage() {
   // Renderizar barras de durabilidad
   const renderDurabilityBars = (level: number, category: string) => {
     const bars = [];
+    const isPvcCategory = category === 'plastico' || category === 'pvc';
+    
     for (let i = 1; i <= 5; i++) {
       bars.push(
         <div 
           key={i} 
-          className={`h-2 rounded-full ${i <= level ? (category === 'plastico' ? 'bg-teal-500' : 'bg-brand-red') : 'bg-gray-300'}`}
+          className={`h-2 rounded-full ${i <= level ? (isPvcCategory ? 'bg-teal-500' : 'bg-brand-red') : 'bg-gray-300'}`}
           style={{ width: '18px' }}
         />
       );
@@ -42,7 +44,7 @@ export default function CatalogoPage() {
     let color = "";
     
     // Lógica especial para PVC
-    if (category === 'plastico' || category === 'pvc') {
+    if (isPvcCategory) {
         label = "RESISTENCIA A HUMEDAD";
         color = "text-teal-600";
     } else {
@@ -136,7 +138,9 @@ export default function CatalogoPage() {
 
   // Componente de tarjeta de producto
   const ProductCard = ({ product }: { product: typeof products[0] }) => {
-    const isPVC = product.category === 'plastico' || product.category === 'pvc';
+    // CORRECCIÓN AQUÍ: Forzamos el tipo a string para evitar el error de TS
+    const categoryStr = product.category as string;
+    const isPVC = categoryStr === 'plastico' || categoryStr === 'pvc';
 
     return (
     <div 
