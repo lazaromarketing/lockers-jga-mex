@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from 'react';
-import Image from 'next/image'; // 👈 IMPORTANTE: Componente optimizado de Next.js
+import { useRouter } from 'next/navigation'; // 👈 1. IMPORTANTE: Para la redirección
+import Image from 'next/image';
 import { 
   FaWhatsapp, FaCheckCircle, FaIndustry, FaShieldAlt, 
   FaTruck, FaClock, FaStar, FaBiohazard, FaTint, FaUserShield 
 } from 'react-icons/fa';
 
 export default function CotizacionAdsPage() {
+  const router = useRouter(); // 👈 2. INICIALIZAR ROUTER
+  
   const [formData, setFormData] = useState({
     nombre: '',
     empresa: '',
@@ -26,7 +29,7 @@ export default function CotizacionAdsPage() {
   const trackConversion = (label: string) => {
     if (typeof window !== 'undefined' && (window as any).gtag) {
       (window as any).gtag('event', 'conversion', {
-        'send_to': `AW-11529534054/${label}`, // Tu ID real
+        'send_to': `AW-11529534054/${label}`, 
       });
     }
   };
@@ -35,7 +38,7 @@ export default function CotizacionAdsPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // 🔥 IMPORTANTE: Reemplaza 'TU_ETIQUETA_FORM' con la etiqueta real de Google Ads (ej: 'h9xKCO6_...')
+    // Rastreo de conversión
     trackConversion('TU_ETIQUETA_FORM');
 
     const nTelefono = "525518246146";
@@ -49,16 +52,23 @@ export default function CotizacionAdsPage() {
 Solicito presupuesto para proyecto de alta durabilidad.`;
 
     const url = `https://wa.me/${nTelefono}?text=${encodeURIComponent(mensajeWA)}`;
+    
+    // Abrir WhatsApp en otra pestaña
     window.open(url, '_blank');
-    setIsSubmitting(false);
+
+    // 👇 3. REDIRECCIÓN A TU PÁGINA DE GRACIAS (Aquí estaba el cambio)
+    setTimeout(() => {
+      router.push('/cotizacion-ads/gracias-ads'); 
+    }, 1500); // Esperamos 1.5 segs para que no bloquee el popup de WhatsApp
   };
 
   const whatsappDirecto = () => {
-    // 🔥 IMPORTANTE: Reemplaza 'TU_ETIQUETA_WA' con la etiqueta real de Google Ads
     trackConversion('TU_ETIQUETA_WA');
-
     const mensaje = "Hola JGA México, busco los lockers de PVC Premium que vi en Google. ¿Me pueden asesorar?";
     window.open(`https://wa.me/525518246146?text=${encodeURIComponent(mensaje)}`, '_blank');
+    
+    // Opcional: También redirigir si dan clic al botón directo
+    // setTimeout(() => router.push('/cotizacion-ads/gracias-ads'), 1500);
   };
 
   return (
@@ -104,6 +114,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
               <div className="bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] p-6 md:p-8 border-t-[10px] border-brand-red">
                 <h2 className="font-oswald text-3xl font-bold text-black text-center uppercase mb-1">Cotización Express</h2>
                 <p className="text-center text-gray-500 text-sm mb-6 font-bold uppercase tracking-widest">Respuesta en menos de 2 horas</p>
+                
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Nombre Completo *" className="w-full px-4 py-4 border-2 border-gray-100 rounded-xl bg-gray-50 text-black outline-none focus:border-brand-red transition-all" />
                   <input type="text" name="empresa" value={formData.empresa} onChange={handleChange} required placeholder="Empresa / Institución *" className="w-full px-4 py-4 border-2 border-gray-100 rounded-xl bg-gray-50 text-black outline-none focus:border-brand-red transition-all" />
@@ -123,7 +134,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
                   </select>
 
                   <button type="submit" disabled={isSubmitting} className="w-full bg-brand-red hover:bg-red-700 text-white font-black py-5 rounded-2xl text-xl uppercase font-oswald shadow-lg transition-all active:scale-95">
-                    {isSubmitting ? 'Enviando...' : 'Obtener mi Presupuesto'}
+                    {isSubmitting ? 'Redirigiendo...' : 'Obtener mi Presupuesto'}
                   </button>
                 </form>
               </div>
@@ -132,7 +143,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
         </div>
       </section>
 
-      {/* SECCIÓN 2: LOGOS DE AUTORIDAD (OPTIMIZADOS) */}
+      {/* SECCIÓN 2: LOGOS DE AUTORIDAD */}
       <section className="py-12 bg-gray-50 border-y border-gray-200">
         <div className="container mx-auto px-4">
           <p className="text-center text-gray-400 text-[10px] font-black uppercase tracking-[0.4em] mb-8">Equipando a los mejores:</p>
@@ -168,7 +179,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
         </div>
       </section>
 
-      {/* SECCIÓN 3: GALERÍA DE PRODUCTO (OPTIMIZADA) */}
+      {/* SECCIÓN 3: GALERÍA DE PRODUCTO */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-16">
@@ -177,12 +188,12 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* CARD 1: PVC */}
+            {/* CARD 1 */}
             <div className="group bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 transition-all hover:-translate-y-2">
               <div className="relative w-full h-64">
                 <Image 
                   src="/images/categories/plastico.jpg" 
-                  alt="Locker de PVC 100% plástico aséptico resistente al agua"
+                  alt="Locker de PVC 100% plástico aséptico"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -195,12 +206,12 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
               </div>
             </div>
 
-            {/* CARD 2: CELULARES */}
+            {/* CARD 2 */}
             <div className="group bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 transition-all hover:-translate-y-2">
               <div className="relative w-full h-64">
                 <Image 
                   src="/images/products/modulo-celulares.jpg" 
-                  alt="Módulo de lockers pequeños para celulares y valores"
+                  alt="Módulo de lockers pequeños para celulares"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -213,12 +224,12 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
               </div>
             </div>
 
-            {/* CARD 3: ACERO */}
+            {/* CARD 3 */}
             <div className="group bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100 transition-all hover:-translate-y-2">
               <div className="relative w-full h-64">
                 <Image 
                   src="/images/products/puerta-doble.jpg" 
-                  alt="Locker de acero industrial reforzado puerta doble"
+                  alt="Locker de acero industrial reforzado"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 33vw"
@@ -234,7 +245,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
         </div>
       </section>
 
-      {/* SECCIÓN 4: POR QUÉ NOSOTROS (TABLA COMPARATIVA) */}
+      {/* SECCIÓN 4: COMPARATIVA */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 max-w-4xl">
           <h2 className="font-oswald text-3xl md:text-4xl font-bold text-center mb-12 uppercase text-black">JGA México vs <span className="text-gray-400">Importados</span></h2>
@@ -261,7 +272,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
         </div>
       </section>
 
-      {/* SECCIÓN 5: CASOS DE USO (INDUSTRIA) */}
+      {/* SECCIÓN 5: CASOS DE USO */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-oswald text-4xl font-bold mb-12 uppercase text-black">Soluciones Especializadas</h2>
@@ -282,7 +293,7 @@ Solicito presupuesto para proyecto de alta durabilidad.`;
         </div>
       </section>
 
-      {/* SECCIÓN 6: CTA FINAL STICKY FEEL */}
+      {/* SECCIÓN 6: CTA FINAL */}
       <section className="py-24 bg-brand-red relative overflow-hidden">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-oswald text-4xl md:text-7xl font-bold text-white mb-8 uppercase italic leading-none">¿Licitación o Proyecto Urgente?</h2>
