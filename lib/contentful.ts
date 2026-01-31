@@ -1,43 +1,57 @@
 import { createClient } from 'contentful';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 
-// Configuración del cliente
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID || '',
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || '',
 });
 
-// Definimos la estructura de los datos (TypeScript)
-export interface BlogPost {
-  sys: { id: string };
-  fields: {
-    title: string;
-    slug: string;
-    image: {
-      fields: {
-        file: {
-          url: string;
-        };
-      };
-    };
-    excerpt: string;
-    date: string;
-    author: string;
-    category: string;
-    content: any; // Rich Text
-  };
-}
-
-// Función 1: Obtener TODOS los artículos (Para la página principal del blog)
-export const getBlogPosts = async () => {
-  const response = await client.getEntries({
-    content_type: 'blogPost', // Debe coincidir con el ID que pusiste en Contentful
-    order: ['-fields.date'],  // Ordenar por fecha (el más nuevo primero)
-  });
-
-  return response.items as unknown as BlogPost[];
+// Función para procesar excerpt de Rich Text a string
+const processExcerpt = (excerpt: any): string => {
+  if (!excerpt) return '';
+  if (typeof excerpt === 'string') return excerpt;
+  if (excerpt.nodeType === 'document') {
+    return documentToPlainTextString(excerpt);
+  }
+  return '';
 };
 
-// Función 2: Obtener UN solo artículo por su URL (Para la página interna)
+// Función para obtener URL de imagen
+const getImageUrl = (asset: any): string => {
+  if (!asset || !asset.fields?.file?.url) {
+    return '/images/hero-locker-industrial.png';
+  }
+  const url = asset.fields.file.url;
+  return url.startsWith('//') ? `https:${url}` : url;
+};
+
+// Función 1: Obtener TODOS los artículos
+export const getBlogPosts = async () => {
+  const response = await client.getEntries({
+    content_type: 'blogPost',
+    order: ['-fields.date'],
+  });
+
+  const processedPosts = response.items.map((item: any) => {
+    const fields = { ...item.fields };
+    
+    if (fields.excerpt) {
+      fields.excerpt = processExcerpt(fields.excerpt);
+    }
+    
+    // Añadimos imageUrl para fácil acceso
+    fields.imageUrl = getImageUrl(fields.image);
+    
+    return {
+      sys: item.sys,
+      fields
+    };
+  });
+  
+  return processedPosts;
+};
+
+// Función 2: Obtener UN solo artículo por su URL
 export const getPostBySlug = async (slug: string) => {
   const response = await client.getEntries({
     content_type: 'blogPost',
@@ -45,6 +59,25 @@ export const getPostBySlug = async (slug: string) => {
     limit: 1,
   });
 
-  const items = response.items as unknown as BlogPost[];
-  return items[0]; // Retorna el primer resultado encontrado
+  if (response.items.length === 0) {
+    return null;
+  }
+
+  const item = response.items[0];
+  const fields = { ...item.fields };
+  
+  // Procesar excerpt a string
+  if (fields.excerpt) {
+    fields.excerpt = processExcerpt(fields.excerpt);
+  }
+  
+  // Añadir imageUrl
+  fields.imageUrl = getImageUrl(fields.image);
+  
+  // NOTA: fields.content se mantiene como Rich Text para renderizarlo después
+
+  return {
+    sys: item.sys,
+    fields
+  };
 };
