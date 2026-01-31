@@ -2,8 +2,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaCalendarAlt, FaUser, FaArrowRight } from 'react-icons/fa';
 
-// 👇 AQUÍ ESTÁ LA CORRECCIÓN DEL IMPORT (Ruta relativa segura)
+// Importación de la lógica de Contentful
 import { getBlogPosts } from '../../lib/contentful'; 
+
+// 👇 ESTA ES LA LÍNEA MÁGICA QUE FALTABA
+// Le dice a Next.js: "Revisa cambios nuevos cada 60 segundos"
+export const revalidate = 60;
 
 export default async function BlogPage() {
   // Pedimos los posts a Contentful
@@ -41,7 +45,7 @@ export default async function BlogPage() {
           {posts.map((post: any) => {
             const { title, slug, date, author, category, excerpt, image } = post.fields;
             
-            // 👇 CORRECCIÓN DE URL DE IMAGEN
+            // CORRECCIÓN DE URL DE IMAGEN
             // Contentful a veces manda la url como "//images.ctfassets..."
             // Aquí le pegamos el "https:" si le falta.
             let imageUrl = '/images/hero-locker-industrial.png'; // Imagen por defecto
