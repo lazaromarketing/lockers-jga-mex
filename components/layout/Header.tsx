@@ -4,14 +4,17 @@ import { useState } from 'react';
 import { Menu, Phone, MapPin, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // Importamos esto para saber en qué página estamos
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname(); // Hook para detectar ruta actual
 
   const navItems = [
     { href: '/', label: 'Inicio' },
     { href: '/catalogo', label: 'Catálogo' },
     { href: '/servicios', label: 'Servicios' },
+    { href: '/blog', label: 'Blog' }, // 👈 AQUÍ AGREGAMOS EL BLOG
     { href: '/nosotros', label: 'Nosotros' },
     { href: '/contacto', label: 'Contacto' },
   ];
@@ -42,15 +45,21 @@ const Header = () => {
 
             {/* DESKTOP NAVIGATION */}
             <nav className="hidden lg:flex items-center space-x-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-brand-white hover:text-brand-red transition-colors font-medium text-sm uppercase tracking-wide"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive = pathname === item.href || (item.href !== '/' && pathname?.startsWith(item.href));
+                
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`transition-colors font-medium text-sm uppercase tracking-wide ${
+                      isActive ? 'text-brand-red font-bold' : 'text-brand-white hover:text-brand-red'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* CONTACT INFO & MOBILE MENU */}
@@ -145,7 +154,9 @@ const Header = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-3 text-brand-white hover:text-brand-red text-lg font-medium border-b border-brand-gray/50"
+                  className={`block py-3 text-lg font-medium border-b border-brand-gray/50 ${
+                     pathname === item.href ? 'text-brand-red' : 'text-brand-white hover:text-brand-red'
+                  }`}
                 >
                   {item.label}
                 </Link>
