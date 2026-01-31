@@ -3,18 +3,18 @@
 import { useState, useEffect } from 'react';
 import { 
   FiFilter, FiX, FiCheck, FiShield, FiTool, 
-  FiDroplet, FiLock, FiDollarSign, FiChevronRight 
+  FiLock, FiDollarSign
 } from 'react-icons/fi';
 import { 
-  FaWhatsapp, FaIndustry, FaSchool, FaBuilding, 
-  FaHospital, FaDumbbell, FaStore, FaFire,
+  FaWhatsapp, FaFire,
   FaShippingFast, FaCertificate, FaHardHat,
-  FaBacteria, FaWater // Iconos nuevos para PVC
+  FaBacteria, FaWater, FaBuilding // Iconos nuevos para PVC
 } from 'react-icons/fa';
-import { GiMetalPlate, GiWoodBeam } from 'react-icons/gi';
-import { products, categories, sectors, narrativeFilters, getSectorIcon } from '@/data/products';
+import { GiMetalPlate } from 'react-icons/gi';
 import Image from 'next/image';
-import Link from 'next/link';
+
+// Importamos los datos (Asegúrate de crear el archivo del paso 2)
+import { products, categories, sectors, narrativeFilters, getSectorIcon } from '@/data/products';
 
 export default function CatalogoPage() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -84,7 +84,7 @@ export default function CatalogoPage() {
     setActiveNarrativeFilter(filterId);
     
     if (filter.id === 'humidity') {
-      setSelectedCategories(['plastico', 'pvc']); // Aseguramos capturar PVC
+      setSelectedCategories(['plastico']); // Aseguramos capturar PVC
       setSelectedSectors([]);
       setSearchQuery('');
     } else if (filter.id === 'sanitario') {
@@ -138,7 +138,6 @@ export default function CatalogoPage() {
 
   // Componente de tarjeta de producto
   const ProductCard = ({ product }: { product: typeof products[0] }) => {
-    // CORRECCIÓN AQUÍ: Forzamos el tipo a string para evitar el error de TS
     const categoryStr = product.category as string;
     const isPVC = categoryStr === 'plastico' || categoryStr === 'pvc';
 
@@ -176,10 +175,11 @@ export default function CatalogoPage() {
       <div className={`absolute inset-0 transition-opacity duration-500 ${
         hoveredProduct === product.id && product.blueprintImage ? 'opacity-0' : 'opacity-100'
       }`}>
-        <img
+        <Image
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
         {product.isHero && (
           <div className="absolute bottom-4 left-4 bg-black/80 text-white px-3 py-2 rounded-lg backdrop-blur-sm">
@@ -196,10 +196,11 @@ export default function CatalogoPage() {
         <div className={`absolute inset-0 transition-opacity duration-500 ${
           hoveredProduct === product.id ? 'opacity-100' : 'opacity-0'
         }`}>
-          <img
+          <Image
             src={product.blueprintImage}
             alt={`Blueprint ${product.name}`}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-blue-900/30 flex items-center justify-center backdrop-blur-[2px]">
             <div className="text-center p-4">
@@ -475,7 +476,7 @@ export default function CatalogoPage() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 pb-20">
         <div className="flex flex-col lg:flex-row gap-8">
           
-          {/* Sidebar - CORREGIDO PARA QUE SE VEA PERFECTO */}
+          {/* Sidebar */}
           <div className="hidden lg:block w-full lg:w-1/4">
             <div className="sticky top-8 bg-white p-6 rounded-xl border border-gray-200 shadow-lg">
               {/* Búsqueda */}

@@ -1,194 +1,219 @@
+import { Metadata } from 'next'; // Importante para SEO
 import Image from 'next/image';
-import { FaRulerCombined, FaHardHat, FaTruck, FaTools, FaHospital, FaIndustry, FaSchool, FaWarehouse } from 'react-icons/fa';
+import { FaRulerCombined, FaHardHat, FaTruck, FaTools, FaHospital, FaIndustry, FaSchool, FaWarehouse, FaCheckCircle } from 'react-icons/fa';
 import { MdPhone, MdEmail, MdLocationOn } from 'react-icons/md';
 
+// 1. METADATOS SEO PODEROSOS
+export const metadata: Metadata = {
+  title: 'Servicios de Ingeniería y Mantenimiento de Lockers | JGA México',
+  description: 'Expertos en diseño, instalación y mantenimiento de lockers industriales y de PVC. Proyectos llave en mano para escuelas, gimnasios y plantas en todo México.',
+  keywords: ['mantenimiento lockers', 'instalacion de lockers', 'fabricacion lockers a medida', 'reparacion de lockers', 'proyectos lockers mexico'],
+};
+
 export default function ServiciosPage() {
+  
+  // 2. HACK SEO: SCHEMA MARKUP PARA SERVICIOS
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Instalación y Mantenimiento de Lockers",
+    "provider": {
+      "@type": "Organization",
+      "name": "Lockers JGA México"
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Mexico"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios Industriales",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Diseño de Vestidores Industriales" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mantenimiento Preventivo de Lockers" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalación de Lockers a Nivel Nacional" } }
+      ]
+    }
+  };
+
   return (
     <main className="min-h-screen">
+      {/* Inyección de Schema SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* SECCIÓN 1: HERO TÉCNICO */}
       <section className="relative bg-brand-black text-white py-20 md:py-32 overflow-hidden">
-       <Image
-  src="/images/servicios/blueprint-background.jpg"
-  alt="Blueprint técnico JGA México"
-  fill
-  className="object-cover opacity-10"
-  priority
-/>
+        <Image
+          src="/images/servicios/blueprint-background.jpg" // Asegúrate que esta imagen exista
+          alt="Ingeniería y Diseño de Lockers Industriales JGA"
+          fill
+          className="object-cover opacity-10"
+          priority
+        />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center justify-center mb-6">
               <div className="w-16 h-1 bg-brand-red mr-4"></div>
-              <span className="font-oswald uppercase tracking-widest text-brand-red text-sm">Servicios JGA</span>
+              <span className="font-oswald uppercase tracking-widest text-brand-red text-sm font-bold">
+                SOLUCIONES INTEGRALES JGA
+              </span>
               <div className="w-16 h-1 bg-brand-red ml-4"></div>
             </div>
             
-            <h1 className="font-oswald text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              MÁS ALLÁ DE LA FABRICACIÓN:<br />
-              <span className="text-brand-red">INGENIERÍA DE ESPACIOS</span>
+            <h1 className="font-oswald text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight uppercase">
+              Ingeniería de Espacios <br />
+              <span className="text-brand-red">& Mantenimiento</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
-              No solo vendemos lockers. Diseñamos, fabricamos e instalamos la solución exacta 
-              para vestidores, plantas industriales y espacios institucionales.
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto font-light">
+              Más que fabricantes, somos tus socios de ingeniería. Diseñamos, instalamos y damos mantenimiento a proyectos de lockers en todo México.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="https://wa.me/5215566778899?text=Hola%20JGA%20México,%20quiero%20cotizar%20un%20proyecto%20integral%20de%20lockers."
+                href="https://wa.me/5215518246146?text=Hola%20JGA,%20necesito%20cotizar%20un%20proyecto%20de%20instalación/mantenimiento."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-none text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 font-oswald"
+                className="bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-none text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 font-oswald shadow-lg shadow-red-900/50"
               >
-                Cotizar Proyecto Integral
+                Cotizar Proyecto
               </a>
               <a 
                 href="#especialidades"
                 className="bg-transparent border-2 border-white hover:bg-white hover:text-brand-black text-white font-bold py-4 px-8 rounded-none text-lg uppercase tracking-wider transition-all duration-300 font-oswald"
               >
-                Ver Especialidades
+                Ver Servicios
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN 2: 4 PILARES DE SERVICIO */}
+      {/* SECCIÓN 2: 4 PILARES DE SERVICIO (SEO Optimizado) */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-brand-black">
-              SERVICIO <span className="text-brand-red">COMPLETO</span>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-brand-black uppercase">
+              Servicio <span className="text-brand-red">Llave en Mano</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              De la idea al producto instalado, con precisión industrial y garantía total.
+              Nos encargamos de todo el ciclo de vida de tu proyecto de lockers.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Pilar 1 */}
-            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl">
+            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl bg-white">
               <div className="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                 <FaRulerCombined className="text-3xl text-brand-red group-hover:text-white" />
               </div>
               <h3 className="font-oswald text-2xl font-bold mb-4 text-brand-black">
-                Diseño y Personalización
+                Diseño a Medida
               </h3>
-              <p className="text-gray-600 mb-4">
-                Si no existe, lo creamos. Adaptamos medidas, colores corporativos y configuraciones 
-                internas específicas para tu espacio.
+              <p className="text-gray-600 mb-4 text-sm">
+                Adaptamos medidas, colores RAL y configuraciones internas. Si tu espacio es irregular, fabricamos el locker exacto que necesitas.
               </p>
-              <ul className="text-sm text-gray-500 space-y-1">
-                <li>✓ Medidas personalizadas</li>
-                <li>✓ Colores RAL a elección</li>
-                <li>✓ Configuraciones especiales</li>
+              <ul className="text-xs font-bold text-gray-500 space-y-2">
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Planos CAD/3D</li>
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Colores Corporativos</li>
               </ul>
             </div>
 
             {/* Pilar 2 */}
-            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl">
+            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl bg-white">
               <div className="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                 <FaHardHat className="text-3xl text-brand-red group-hover:text-white" />
               </div>
               <h3 className="font-oswald text-2xl font-bold mb-4 text-brand-black">
-                Asesoría Técnica y Planimetría
+                Ingeniería Civil
               </h3>
-              <p className="text-gray-600 mb-4">
-                Optimizamos cada m². Analizamos tus planos y diseñamos la distribución más eficiente 
-                para el flujo de personal.
+              <p className="text-gray-600 mb-4 text-sm">
+                Optimizamos el flujo de personal en vestidores industriales. Calculamos capacidades y rutas de evacuación.
               </p>
-              <ul className="text-sm text-gray-500 space-y-1">
-                <li>✓ Interpretación de planos</li>
-                <li>✓ Optimización de espacios</li>
-                <li>✓ Propuesta 3D visual</li>
+              <ul className="text-xs font-bold text-gray-500 space-y-2">
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Análisis de Flujo</li>
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Normativa STPS</li>
               </ul>
             </div>
 
             {/* Pilar 3 */}
-            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl">
+            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl bg-white">
               <div className="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                 <FaTruck className="text-3xl text-brand-red group-hover:text-white" />
               </div>
               <h3 className="font-oswald text-2xl font-bold mb-4 text-brand-black">
-                Instalación Profesional
+                Instalación Nacional
               </h3>
-              <p className="text-gray-600 mb-4">
-                Nuestros técnicos especializados instalan, nivelan y anclan cada módulo. 
-                Listo para usar desde el primer día.
+              <p className="text-gray-600 mb-4 text-sm">
+                Cuadrillas propias en CDMX y red de instaladores certificados en toda la República. Nivelación y anclaje profesional.
               </p>
-              <ul className="text-sm text-gray-500 space-y-1">
-                <li>✓ Técnicos certificados</li>
-                <li>✓ Garantía de instalación</li>
-                <li>✓ Limpieza post-instalación</li>
+              <ul className="text-xs font-bold text-gray-500 space-y-2">
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Anclaje Sísmico</li>
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Entrega Llave en Mano</li>
               </ul>
             </div>
 
             {/* Pilar 4 */}
-            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl">
+            <div className="group p-6 border-2 border-gray-100 hover:border-brand-red transition-all duration-300 hover:shadow-xl bg-white">
               <div className="w-16 h-16 bg-brand-red/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-red group-hover:text-white transition-all duration-300">
                 <FaTools className="text-3xl text-brand-red group-hover:text-white" />
               </div>
               <h3 className="font-oswald text-2xl font-bold mb-4 text-brand-black">
-                Mantenimiento y Refacciones
+                Mantenimiento y Reparación
               </h3>
-              <p className="text-gray-600 mb-4">
-                Vida útil extendida. Stock permanente de repuestos y servicio técnico especializado 
-                para mantener tus lockers operativos.
+              <p className="text-gray-600 mb-4 text-sm">
+                Extendemos la vida de tus activos. Servicio de reparación de puertas, cambio de chapas y pintura electrostática en sitio.
               </p>
-              <ul className="text-sm text-gray-500 space-y-1">
-                <li>✓ Repuestos garantizados</li>
-                <li>✓ Servicio en 24-48 hrs</li>
-                <li>✓ Planes de mantenimiento</li>
+              <ul className="text-xs font-bold text-gray-500 space-y-2">
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Refacciones Originales</li>
+                <li className="flex items-center gap-2"><FaCheckCircle className="text-green-500"/> Pólizas Anuales</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECCIÓN 3: PROCESO DE TRABAJO */}
+      {/* SECCIÓN 3: PROCESO (Sin cambios mayores, solo visual) */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-brand-black">
-              EL PROCESO <span className="text-brand-red">JGA</span>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-brand-black uppercase">
+              Metodología <span className="text-brand-red">Certificada</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Metodología probada que garantiza resultados precisos y a tiempo.
+              Garantizamos tiempos de entrega y calidad en cada etapa.
             </p>
           </div>
 
           <div className="relative">
-            {/* Línea de tiempo */}
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gray-300 transform -translate-y-1/2"></div>
+            {/* Línea conectora */}
+            <div className="hidden lg:block absolute top-12 left-0 right-0 h-1 bg-gray-200 transform -translate-y-1/2 z-0"></div>
             
-            <div className="grid lg:grid-cols-4 gap-8 relative">
+            <div className="grid lg:grid-cols-4 gap-8 relative z-10">
               {[
-                { step: "01", title: "Diagnóstico", desc: "Analizamos tu necesidad específica, flujo de usuarios y condiciones del espacio." },
-                { step: "02", title: "Propuesta Técnica", desc: "Presentamos ficha técnica y cotización formal en menos de 24 horas hábiles." },
-                { step: "03", title: "Fabricación", desc: "Corte láser, doblado CNC y soldadura robotizada en nuestra planta certificada." },
-                { step: "04", title: "Entrega/Instalación", desc: "Transporte especializado e instalación profesional por técnicos certificados." }
+                { step: "01", title: "Diagnóstico", desc: "Visita técnica o análisis de planos para entender tu necesidad." },
+                { step: "02", title: "Ingeniería", desc: "Diseño y propuesta técnica con renders y fichas de especificación." },
+                { step: "03", title: "Fabricación", desc: "Producción ISO en nuestra planta con corte láser y soldadura MIG." },
+                { step: "04", title: "Ejecución", desc: "Logística, instalación, nivelación y entrega final al cliente." }
               ].map((item, index) => (
-                <div key={index} className="relative">
-                  <div className="bg-white p-8 border-2 border-gray-200 hover:border-brand-red transition-all duration-300 h-full">
-                    <div className="flex items-start mb-6">
-                      <div className="w-12 h-12 bg-brand-red text-white flex items-center justify-center font-bold text-xl mr-4">
+                <div key={index} className="relative group">
+                  <div className="bg-white p-8 border-2 border-gray-200 hover:border-brand-red transition-all duration-300 h-full shadow-lg group-hover:-translate-y-2">
+                    <div className="flex items-center mb-6">
+                      <div className="w-14 h-14 bg-brand-red text-white flex items-center justify-center font-bold text-2xl mr-4 rounded-lg shadow-lg shadow-brand-red/30">
                         {item.step}
                       </div>
-                      <h3 className="font-oswald text-2xl font-bold pt-2 text-brand-black">
+                      <h3 className="font-oswald text-xl font-bold pt-1 text-brand-black uppercase">
                         {item.title}
                       </h3>
                     </div>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
-                  {index < 3 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-8 text-brand-red transform -translate-y-1/2">
-                      <svg className="w-full h-full" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
@@ -196,53 +221,53 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 4: ESPECIALIDADES */}
+      {/* SECCIÓN 4: ESPECIALIDADES POR INDUSTRIA */}
       <section id="especialidades" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-brand-black">
-              SOLUCIONES <span className="text-brand-red">ESPECIALIZADAS</span>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-brand-black uppercase">
+              Soluciones por <span className="text-brand-red">Industria</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Adaptamos nuestra ingeniería a los requerimientos específicos de cada industria.
+              No es lo mismo un hospital que una mina. Tenemos la experiencia para cada sector.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { 
-                icon: <FaHospital className="text-3xl" />, 
-                title: "Sector Salud", 
-                desc: "Lockers Slop-Top para cumplimiento normativo del IMSS y hospitales. Diseño antiderrames y fácil limpieza.",
-                color: "bg-blue-50 border-blue-200"
+                icon: <FaHospital className="text-4xl text-blue-500" />, 
+                title: "Sector Salud (IMSS)", 
+                desc: "Lockers Slop-Top (Techo inclinado) para cumplir norma de higiene. Pintura antibacterial y acero inoxidable.",
+                color: "border-blue-100 hover:border-blue-500 bg-blue-50/30"
               },
               { 
-                icon: <FaIndustry className="text-3xl" />, 
-                title: "Plantas Industriales", 
-                desc: "Módulos de resguardo de celulares de alta densidad. Materiales resistentes a químicos y ambientes agresivos.",
-                color: "bg-gray-50 border-gray-200"
+                icon: <FaIndustry className="text-4xl text-gray-600" />, 
+                title: "Industria Pesada", 
+                desc: "Lockers de carga pesada calibre 20/22. Resistentes a golpes, grasa y uso rudo continuo (3 turnos).",
+                color: "border-gray-200 hover:border-gray-600 bg-gray-50"
               },
               { 
-                icon: <FaSchool className="text-3xl" />, 
-                title: "Instituciones Educativas", 
-                desc: "Sistemas modulares escolares. Durabilidad comprobada para alto tráfico y uso intensivo diario.",
-                color: "bg-green-50 border-green-200"
+                icon: <FaSchool className="text-4xl text-green-500" />, 
+                title: "Sector Educativo", 
+                desc: "Sistemas modulares antivandálicos. Puertas reforzadas y bisagras ocultas para escuelas y universidades.",
+                color: "border-green-100 hover:border-green-500 bg-green-50/30"
               },
               { 
-                icon: <FaWarehouse className="text-3xl" />, 
+                icon: <FaWarehouse className="text-4xl text-cyan-500" />, 
                 title: "Zonas Húmedas", 
-                desc: "Fabricación híbrida o 100% plástica. Resistencia total a humedad, salitre y ambientes corrosivos.",
-                color: "bg-cyan-50 border-cyan-200"
+                desc: "Tecnología PVC JGA. 100% Inoxidable para albercas, vestidores de minas y plataformas petroleras.",
+                color: "border-cyan-100 hover:border-cyan-500 bg-cyan-50/30"
               }
             ].map((item, index) => (
-              <div key={index} className={`p-6 border-2 ${item.color} hover:border-brand-red transition-all duration-300 hover:shadow-lg h-full`}>
-                <div className="text-brand-red mb-4">
+              <div key={index} className={`p-8 border-2 ${item.color} transition-all duration-300 hover:shadow-xl rounded-xl h-full flex flex-col items-center text-center`}>
+                <div className="mb-6 transform transition-transform group-hover:scale-110">
                   {item.icon}
                 </div>
-                <h3 className="font-oswald text-xl font-bold mb-3 text-brand-black">
+                <h3 className="font-oswald text-xl font-bold mb-3 text-brand-black uppercase">
                   {item.title}
                 </h3>
-                <p className="text-gray-600 text-sm">
+                <p className="text-gray-600 text-sm leading-relaxed">
                   {item.desc}
                 </p>
               </div>
@@ -252,84 +277,73 @@ export default function ServiciosPage() {
       </section>
 
       {/* SECCIÓN 5: GALERÍA "RENDER vs REALIDAD" */}
-      <section className="py-20 bg-gray-900 text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-gray-900 text-white relative overflow-hidden">
+        {/* Fondo sutil */}
+        <div className="absolute inset-0 bg-[url('/images/pattern-grid.png')] opacity-10"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6">
-              DEL <span className="text-brand-red">PLANO</span> A LA <span className="text-brand-red">REALIDAD</span>
+            <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 uppercase">
+              Del <span className="text-brand-red">Plano</span> a la <span className="text-brand-red">Realidad</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Transformamos especificaciones técnicas en soluciones físicas de precisión.
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              La precisión es nuestra firma. Lo que diseñamos es exactamente lo que instalamos.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <div className="space-y-6">
-              <div className="border-2 border-gray-700 p-4">
-               <div className="aspect-video relative overflow-hidden">
-  <Image
-    src="/images/servicios/blueprint-diseno.jpg"
-    alt="Plano técnico de locker JGA"
-    fill
-    className="object-cover"
-  />
-                  <div className="relative z-10 text-center p-8">
-                    <div className="inline-block p-4 bg-gray-900/90 border-2 border-gray-700">
-                      <h4 className="font-oswald text-2xl mb-2 text-brand-red">PLANO TÉCNICO</h4>
-                      <p className="text-gray-300">Especificaciones exactas y medidas milimétricas</p>
-                    </div>
+          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            {/* LADO A: DISEÑO */}
+            <div className="space-y-6 group">
+              <div className="border-2 border-gray-700 p-2 bg-gray-800 rounded-lg transform transition-transform hover:-translate-y-1 hover:border-brand-red">
+                <div className="aspect-video relative overflow-hidden rounded">
+                  <Image
+                    src="/images/servicios/blueprint-diseno.jpg" // Asegúrate que exista
+                    alt="Plano técnico de locker JGA"
+                    fill
+                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                  />
+                  <div className="absolute bottom-0 left-0 bg-brand-red px-4 py-1 text-xs font-bold uppercase tracking-wider">
+                    Fase 1: Ingeniería
                   </div>
                 </div>
-                <p className="text-gray-400 text-sm mt-4 text-center">
-                  Blueprint técnico con todas las especificaciones de diseño
-                </p>
               </div>
               
-              <div className="bg-brand-black p-6 border-l-4 border-brand-red">
-                <h4 className="font-oswald text-xl mb-3">Precisión de Ingeniería</h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li>✓ Mediciones CAD/CAM exactas</li>
-                  <li>✓ Tolerancias de ±0.5mm garantizadas</li>
-                  <li>✓ Materiales especificados por norma</li>
-                  <li>✓ Pruebas de resistencia documentadas</li>
+              <div className="px-4">
+                <h4 className="font-oswald text-xl mb-3 text-white flex items-center gap-2">
+                  <FaRulerCombined className="text-brand-red"/> Especificación Técnica
+                </h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li>• Planimetría CAD detallada</li>
+                  <li>• Cálculo de cargas y resistencia</li>
+                  <li>• Selección de materiales por norma</li>
                 </ul>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="border-2 border-gray-700 p-4">
-                <div className="aspect-video bg-gray-800 flex items-center justify-center">
-                  {/* Aquí va la foto real del locker instalado */}
-                  <div className="relative w-full h-full overflow-hidden">
-                <div className="aspect-video relative overflow-hidden">
-  <Image
-    src="/images/servicios/instalacion-real.jpg"
-    alt="Instalación real de lockers JGA"
-    fill
-    className="object-cover"
-  />
-                      <h4 className="font-oswald text-2xl mb-2 text-white">INSTALACIÓN REAL</h4>
-                      <p className="text-gray-300 mb-4 text-center">Producto fabricado e instalado según especificaciones</p>
-                      <div className="flex space-x-4">
-                        <div className="w-20 h-20 bg-gray-700/50 border border-gray-600"></div>
-                        <div className="w-20 h-20 bg-gray-700/50 border border-gray-600"></div>
-                        <div className="w-20 h-20 bg-gray-700/50 border border-gray-600"></div>
-                      </div>
-                    </div>
+            {/* LADO B: REALIDAD */}
+            <div className="space-y-6 group">
+              <div className="border-2 border-gray-700 p-2 bg-gray-800 rounded-lg transform transition-transform hover:-translate-y-1 hover:border-green-500">
+                <div className="aspect-video relative overflow-hidden rounded">
+                  <Image
+                    src="/images/servicios/instalacion-real.jpg" // Asegúrate que exista
+                    alt="Instalación real de lockers JGA"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute bottom-0 left-0 bg-green-600 px-4 py-1 text-xs font-bold uppercase tracking-wider">
+                    Fase 2: Entrega Final
                   </div>
                 </div>
-                <p className="text-gray-400 text-sm mt-4 text-center">
-                  Resultado final instalado en planta industrial
-                </p>
               </div>
               
-              <div className="bg-brand-black p-6 border-l-4 border-brand-red">
-                <h4 className="font-oswald text-xl mb-3">Garantía de Calidad</h4>
-                <ul className="space-y-2 text-gray-300">
-                  <li>✓ Instalación certificada por técnicos</li>
-                  <li>✓ Prueba de carga y funcionamiento</li>
-                  <li>✓ Documentación técnica completa</li>
-                  <li>✓ Garantía de 5 años en estructura</li>
+              <div className="px-4">
+                <h4 className="font-oswald text-xl mb-3 text-white flex items-center gap-2">
+                  <FaCheckCircle className="text-green-500"/> Instalación Certificada
+                </h4>
+                <ul className="space-y-2 text-gray-400 text-sm">
+                  <li>• Ejecución milimétrica</li>
+                  <li>• Pruebas de funcionamiento</li>
+                  <li>• Entrega llave en mano</li>
                 </ul>
               </div>
             </div>
@@ -337,60 +351,60 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 6: CTA PARA ARQUITECTOS Y CONTRATISTAS */}
-      <section className="py-20 bg-gray-50">
+      {/* SECCIÓN 6: CTA ARQUITECTOS (Conversión B2B) */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-white border-2 border-brand-red p-8 md:p-12 shadow-2xl">
-            <div className="text-center">
-              <div className="inline-block p-3 bg-brand-red/10 mb-6">
-                <span className="font-oswald uppercase tracking-widest text-brand-red font-bold">
-                  PROYECTOS ESPECIALES
-                </span>
-              </div>
+          <div className="max-w-5xl mx-auto bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 p-10 md:p-14 rounded-3xl shadow-2xl relative overflow-hidden">
+            {/* Decoración */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-red/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+
+            <div className="relative z-10 text-center">
+              <span className="inline-block py-1 px-3 rounded-full bg-brand-red/10 text-brand-red font-bold text-xs uppercase tracking-widest mb-6 border border-brand-red/20">
+                Atención B2B Especializada
+              </span>
               
-              <h2 className="font-oswald text-3xl md:text-4xl font-bold mb-6 text-brand-black">
+              <h2 className="font-oswald text-3xl md:text-5xl font-bold mb-6 text-brand-black">
                 ¿ERES <span className="text-brand-red">ARQUITECTO</span> O <span className="text-brand-red">CONTRATISTA</span>?
               </h2>
               
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Tenemos condiciones especiales para proyectos de volumen y soporte técnico 
-                completo para licitaciones y desarrollos arquitectónicos.
+              <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto font-light">
+                Sabemos lo que necesitas: <strong>Tiempos de entrega reales, fichas técnicas completas y precios competitivos</strong> para ganar licitaciones.
               </p>
               
-              <div className="grid md:grid-cols-3 gap-6 mb-10">
-                <div className="text-center p-4 border border-gray-200">
-                  <div className="text-3xl font-bold text-brand-red mb-2">-15%</div>
-                  <p className="text-sm text-gray-600">Descuento en volumen</p>
+              <div className="grid md:grid-cols-3 gap-8 mb-12">
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                  <div className="text-4xl font-bold text-brand-red mb-1">-15%</div>
+                  <div className="text-xs font-bold uppercase text-gray-500">Precio Distribuidor</div>
                 </div>
-                <div className="text-center p-4 border border-gray-200">
-                  <div className="text-3xl font-bold text-brand-red mb-2">24h</div>
-                  <p className="text-sm text-gray-600">Respuesta técnica</p>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                  <div className="text-4xl font-bold text-brand-red mb-1">24h</div>
+                  <div className="text-xs font-bold uppercase text-gray-500">Cotización Express</div>
                 </div>
-                <div className="text-center p-4 border border-gray-200">
-                  <div className="text-3xl font-bold text-brand-red mb-2">100%</div>
-                  <p className="text-sm text-gray-600">Documentación completa</p>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                  <div className="text-4xl font-bold text-brand-red mb-1">DWG</div>
+                  <div className="text-xs font-bold uppercase text-gray-500">Archivos Editables</div>
                 </div>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a 
-                  href="https://wa.me/5215566778899?text=Hola%20JGA%20México,%20soy%20arquitecto/contratista%20y%20necesito%20cotización%20para%20un%20proyecto%20de%20lockers."
+                  href="https://wa.me/5215566778899?text=Hola%20JGA,%20soy%20arquitecto/contratista%20y%20necesito%20precio%20especial%20para%20proyecto."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-none text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-105 font-oswald"
+                  className="bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 shadow-lg hover:shadow-red-900/40 flex items-center justify-center gap-2"
                 >
-                  Contactar Departamento de Proyectos
+                  <MdPhone /> Contactar Proyectos
                 </a>
                 <a 
-                  href="mailto:proyectos@jgamexico.com?subject=Cotización para Proyecto Arquitectónico"
-                  className="bg-transparent border-2 border-brand-black hover:bg-brand-black hover:text-white text-brand-black font-bold py-4 px-8 rounded-none text-lg uppercase tracking-wider transition-all duration-300 font-oswald"
+                  href="mailto:proyectos@jgamexico.com?subject=Solicitud de Ficha Técnica y Lista de Precios"
+                  className="bg-white border-2 border-gray-300 hover:border-brand-black hover:text-brand-black text-gray-600 font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  Solicitar Ficha Técnica
+                  <MdEmail /> Solicitar Catálogo PDF
                 </a>
               </div>
               
-              <p className="text-gray-500 text-sm mt-8">
-                Incluye: Planos en CAD, especificaciones técnicas, memoria de cálculo y certificaciones.
+              <p className="text-gray-400 text-xs mt-8">
+                *Descuentos aplicables en compras por volumen superiores a 20 unidades.
               </p>
             </div>
           </div>

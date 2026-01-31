@@ -1,8 +1,16 @@
+import { 
+  FaIndustry, FaSchool, FaBuilding, 
+  FaHospital, FaDumbbell, FaStore
+} from 'react-icons/fa';
+
+// Tipos de datos (Ajustado para que coincida con tu página)
 export interface Product {
   id: string;
   name: string;
   slug: string;
+  // Ajuste: agregué 'bancas' y 'tecnologia' al tipo category
   category: "metalicos" | "plastico" | "madera" | "accesorios" | "bancas" | "tecnologia";
+  // Ajuste: agregué 'oficina' y otros al tipo sector
   sector: "industrial" | "escolar" | "oficina" | "hospital" | "gym" | "entretenimiento" | "retail";
   image: string;
   blueprintImage?: string;
@@ -13,21 +21,21 @@ export interface Product {
   isHero?: boolean;
   features: string[];
   durabilityLevel: 1 | 2 | 3 | 4 | 5;
-  construction: "soldado" | "remachado" | "ensamblado" | "carpinteria" | "hibrido" | "n/a";
+  construction: "soldado" | "remachado" | "ensamblado" | "carpinteria" | "hibrido" | "n/a" | "pvc";
   warranty: string;
   leadTime: string;
 }
 
 export const products: Product[] = [
-  // ⭐⭐⭐ PRODUCTO HERO - MANTENER ORIGINAL (LVC PRO) ⭐⭐⭐
+  // ⭐⭐⭐ PRODUCTO HERO ⭐⭐⭐
   {
     id: "lvc-pro",
     name: "LVC PRO - Sistema Modular Industrial",
     slug: "lvc-pro-modular-industrial",
     category: "metalicos",
     sector: "industrial",
-image: "/images/products/lvc-pro-hero.jpg",
-    blueprintImage: "/images/products/blueprint-lvc.jpg",
+    image: "/images/hero-locker-industrial.png", // Asegúrate que la imagen exista
+    blueprintImage: "/images/hero-locker-industrial.png",
     specs: "Calibre 22 | Soldadura Robotizada | Sistema Anti-deformación",
     description: "EL ESTÁNDAR DE LA INDUSTRIA. Sistema modular diseñado para soportar las condiciones más extremas en minería, manufactura y logística. Estructura 100% soldada - cero remaches.",
     isBestSeller: true,
@@ -46,7 +54,7 @@ image: "/images/products/lvc-pro-hero.jpg",
   },
 
   // ========================
-  // LOCKERS METÁLICOS (DEL PDF)
+  // LOCKERS METÁLICOS
   // ========================
   {
     id: "met-imss-sloptop",
@@ -54,8 +62,8 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-imss-sloptop-sanitario",
     category: "metalicos",
     sector: "hospital",
-    image: "/images/products/imss-sloptop.jpg",
-    blueprintImage: "/images/products/blueprint-sloptop.jpg",
+    image: "/images/hero-locker-industrial.png",
+    blueprintImage: "/images/hero-locker-industrial.png",
     specs: "Techo Inclinado | Rejilla Acero Inox | No acumula polvo",
     description: "Diseño sanitario especial para hospitales IMSS. Techo inclinado (Slop-Top) que evita acumulación de polvo y bacterias. Rejillas y manijas en acero inoxidable.",
     isBestSeller: true,
@@ -72,8 +80,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-industrial-sin-remaches",
     category: "metalicos",
     sector: "industrial",
-    image: "/images/products/industrial-sin-remaches.jpg",
-    blueprintImage: "/images/products/blueprint-sin-remaches.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Marco Cal. 18 | Puerta Cal. 20 | Pintura Epóxica Horneada",
     description: "Estructura 100% soldada - SIN REMACHES que se aflojen. Fabricado para uso rudo en minas y plantas. Pintura epóxica resistente a químicos.",
     isNew: true,
@@ -90,7 +97,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-puerta-doble-z",
     category: "metalicos",
     sector: "gym",
-    image: "/images/products/puerta-doble.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Diseño en Z | Optimización de espacio | Doble acceso",
     description: "Diseño inteligente en 'Z' o puerta doble para vestidores. Optimiza espacio sin sacrificar capacidad. Apertura cómoda desde ambos lados.",
     features: ["Ahorro de espacio", "Diseño ergonómico", "Barra colgadora", "Ideal para gimnasios"],
@@ -101,7 +108,7 @@ image: "/images/products/lvc-pro-hero.jpg",
   },
 
   // ========================
-  // LOCKERS PVC (DEL PDF)
+  // LOCKERS PVC
   // ========================
   {
     id: "pvc-impermeable",
@@ -109,13 +116,13 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-pvc-impermeable",
     category: "plastico",
     sector: "gym",
-    image: "/images/products/pvc-impermeable.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Plástico Ingeniería | Anti-Hongos | Anti-Fuego | No Guarda Olores",
     description: "La solución definitiva para zonas húmedas (albercas, costas, spas). No propaga fuego, no guarda olores, inmune a corrosión y hongos.",
     isBestSeller: true,
     features: ["100% lavable", "Cero óxido", "Resistente a temperaturas", "Personalizable colores"],
     durabilityLevel: 5,
-    construction: "ensamblado",
+    construction: "pvc", // Ajustado a 'pvc' para lógica visual
     warranty: "Vida útil +20 años",
     leadTime: "Fabricación a medida"
   },
@@ -126,12 +133,12 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-pvc-ventana-acrilico",
     category: "plastico",
     sector: "escolar",
-    image: "/images/products/pvc-ventana.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Ventana Transparente | Cuerpo PVC | Control visual",
     description: "Permite inspección del contenido sin abrir la puerta. Ventana de acrílico de alta resistencia. Ideal para escuelas y áreas de seguridad.",
     features: ["Control visual", "Elegante", "Seguro", "No guarda olores"],
     durabilityLevel: 4,
-    construction: "ensamblado",
+    construction: "pvc",
     warranty: "5 años",
     leadTime: "Sobre pedido"
   },
@@ -142,18 +149,18 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-pvc-2puertas-ventilacion",
     category: "plastico",
     sector: "gym",
-    image: "/images/products/pvc-2puertas.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "2 Puertas | Sistema ventilación | No guarda humedad",
     description: "Diseño de 2 puertas con arillo de ventilación integrado. Perfecto para vestidores donde se necesita aireación constante.",
     features: ["Ventilación 360°", "Fácil limpieza", "Elegante", "Varios colores"],
     durabilityLevel: 4,
-    construction: "ensamblado",
+    construction: "pvc",
     warranty: "5 años",
     leadTime: "Fabricación 7 días"
   },
 
   // ========================
-  // LOCKERS MADERA/MDF (DEL PDF)
+  // LOCKERS MADERA/MDF
   // ========================
   {
     id: "mad-ejecutivo",
@@ -161,7 +168,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "locker-ejecutivo-mdf-melamina",
     category: "madera",
     sector: "gym",
-    image: "/images/products/ejecutivo-melamina.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "MDF Chileno | Melamina Texturizada | Diseño Premium",
     description: "Acabados de lujo para vestidores ejecutivos y clubes deportivos premium. Fabricado sobre diseño en MDF con recubrimiento de melamina.",
     features: ["Diseño premium", "Medidas especiales", "Bisagras ocultas", "Resistente al agua"],
@@ -172,7 +179,7 @@ image: "/images/products/lvc-pro-hero.jpg",
   },
 
   // ========================
-  // BANCAS (DEL PDF)
+  // BANCAS
   // ========================
   {
     id: "banca-pvc-metal",
@@ -180,7 +187,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "banca-vestidor-pvc-metal",
     category: "bancas",
     sector: "gym",
-    image: "/images/products/banca-vestidor.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Largo a medida | Anti-humedad | Varios colores",
     description: "Bancas resistentes a la humedad y uso continuo. Disponible en estructura metálica o 100% plástico para zonas mojadas.",
     features: ["Ergonómica", "Lavable", "Colores variados", "Resistente"],
@@ -191,7 +198,7 @@ image: "/images/products/lvc-pro-hero.jpg",
   },
 
   // ========================
-  // MÓDULOS CELULARES (DEL PDF)
+  // MÓDULOS CELULARES
   // ========================
   {
     id: "modulo-celulares",
@@ -199,7 +206,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "modulo-celulares-seguridad",
     category: "metalicos",
     sector: "oficina",
-    image: "/images/products/modulo-celulares.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "10 a 50 Puertas | Chapa individual | Alta seguridad",
     description: "Gabinetes de alta densidad para resguardo de dispositivos móviles. Indispensable para áreas restringidas o zonas de producción.",
     features: ["Alta seguridad", "Compacto", "Control de activos", "Ideal para fábricas"],
@@ -210,7 +217,7 @@ image: "/images/products/lvc-pro-hero.jpg",
   },
 
   // ========================
-  // TECNOLOGÍA Y CERRADURAS (DEL PDF)
+  // TECNOLOGÍA Y CERRADURAS
   // ========================
   {
     id: "cerradura-ojmar",
@@ -218,7 +225,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "cerradura-inteligente-ojmar",
     category: "tecnologia",
     sector: "gym",
-    image: "/images/products/cerradura-ojmar.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Teclado Touch | App móvil | Colores Plata/Negro",
     description: "Cerradura de lujo con teclado Touch. Se gestiona mediante aplicación móvil. Estándar de oro para clubes premium y oficinas ejecutivas.",
     features: ["Keyless", "Gestión por app", "Diseño lujo", "Seguridad máxima"],
@@ -234,7 +241,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "cerradura-moneda-5-pesos",
     category: "tecnologia",
     sector: "industrial",
-    image: "/images/products/cerradura-moneda.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Moneda $5 MXN | Mecánica robusta | Versión retornable o alcancía",
     description: "Mecanismo robusto que acepta monedas de $5 MXN. Disponible en versión retornable (para visitas) o alcancía (cobro de uso).",
     features: ["Autogestión", "Ingresos extra", "Uso público", "Fácil instalación"],
@@ -250,7 +257,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "cerradura-combinacion-4-digitos",
     category: "tecnologia",
     sector: "escolar",
-    image: "/images/products/cerradura-combinacion.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "4 dígitos | Fácil instalación | Se adapta a todos",
     description: "Chapa de combinación de 4 dígitos. De fácil instalación y se adapta a todos los lockers. Precio accesible con máxima seguridad.",
     features: ["Sin llaves", "Reconfigurable", "Segura", "Económica"],
@@ -266,7 +273,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "cerradura-llave-nacional",
     category: "tecnologia",
     sector: "escolar",
-    image: "/images/products/cerradura-llave.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Llave nacional | Fácil instalación | Excelente seguridad",
     description: "Cerradura de llave estándar nacional. De fácil instalación, precio accesible y excelente seguridad para uso escolar o industrial.",
     features: ["Llave estándar", "Económica", "Fácil mantenimiento", "Disponible"],
@@ -282,7 +289,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "sistema-master-lock",
     category: "tecnologia",
     sector: "industrial",
-    image: "/images/products/master-lock.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Candado combinación perilla | Con llave | 4 dígitos",
     description: "Sistemas de seguridad profesional MASTER LOCK. Candados de combinación en perilla, con llave y 4 dígitos.",
     features: ["Marca reconocida", "Alta seguridad", "Resistente", "Garantía internacional"],
@@ -293,7 +300,7 @@ image: "/images/products/lvc-pro-hero.jpg",
   },
 
   // ========================
-  // ACCESORIOS (MANTENER ORIGINAL)
+  // ACCESORIOS
   // ========================
   {
     id: "acc-1",
@@ -301,7 +308,7 @@ image: "/images/products/lvc-pro-hero.jpg",
     slug: "kit-instalacion-profesional",
     category: "accesorios",
     sector: "industrial",
-    image: "/images/products/kit-instalacion.jpg",
+    image: "/images/hero-locker-industrial.png",
     specs: "Incluye anclas, tornillería, nivel",
     description: "Kit completo para instalación profesional de lockers en cualquier superficie.",
     features: ["Anclas expansivas", "Todos los tornillos", "Nivel profesional"],
@@ -313,7 +320,7 @@ image: "/images/products/lvc-pro-hero.jpg",
 ];
 
 // ========================
-// FILTROS NARRATIVOS (ACTUALIZADOS CON PDF)
+// FILTROS NARRATIVOS
 // ========================
 export const narrativeFilters = [
   {
@@ -361,7 +368,7 @@ export const narrativeFilters = [
 ];
 
 // ========================
-// CATEGORÍAS (ACTUALIZADAS CON PDF)
+// CATEGORÍAS
 // ========================
 export const categories = [
   { id: "metalicos", label: "Metálicos", count: 4 },
@@ -373,7 +380,7 @@ export const categories = [
 ];
 
 // ========================
-// SECTORES (ACTUALIZADOS CON PDF)
+// SECTORES
 // ========================
 export const sectors = [
   { id: "industrial", label: "Industrial/Minería", count: 5 },

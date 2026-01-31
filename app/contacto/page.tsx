@@ -62,6 +62,34 @@ export default function ContactoPage() {
 
   return (
     <main className="min-h-screen bg-brand-black">
+      
+      {/* 1. HACK SEO: Schema Markup para Página de Contacto */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "mainEntity": {
+              "@type": "Organization",
+              "name": "Lockers JGA México",
+              "telephone": "+52-55-1824-6146",
+              "email": "ventasjga.lockers@gmail.com",
+              "url": "https://lockersjgamexico.com/contacto",
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "telephone": "+52-55-1824-6146",
+                  "contactType": "sales",
+                  "areaServed": "MX",
+                  "availableLanguage": "Spanish"
+                }
+              ]
+            }
+          })
+        }}
+      />
+
       {/* SECCIÓN 1: HEADER "SIN ESPERAS" */}
       <section className="relative bg-brand-black text-white py-16 md:py-24 overflow-hidden">
         <div className="absolute top-10 right-10">
@@ -118,20 +146,20 @@ export default function ContactoPage() {
                 href={`https://wa.me/525518246146?text=${getWhatsAppMessage()}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block bg-green-600 hover:bg-green-700 text-white p-6 rounded-lg mb-8 transition-all duration-300 transform hover:scale-[1.02] text-center group"
+                className="block bg-green-600 hover:bg-green-700 text-white p-6 rounded-lg mb-8 transition-all duration-300 transform hover:scale-[1.02] text-center group shadow-xl hover:shadow-green-900/20"
               >
                 <div className="flex flex-col items-center">
                   <FaWhatsapp className="text-5xl mb-4 animate-bounce" />
                   <span className="font-oswald text-2xl font-bold mb-2">HABLAR CON UN ASESOR AHORA</span>
                   <p className="text-green-100">Respuesta inmediata • Ingeniero especializado</p>
-                  <div className="mt-4 text-sm bg-green-700/50 px-3 py-1 rounded-full">
-                    Normalmente respondemos en 5 minutos
+                  <div className="mt-4 text-sm bg-green-700/50 px-3 py-1 rounded-full border border-green-400/30">
+                    Respuesta promedio: 5 minutos
                   </div>
                 </div>
               </a>
               
               <div className="space-y-6">
-                <div className="border border-gray-200 p-6 rounded-lg hover:border-brand-red transition-colors duration-300">
+                <div className="border border-gray-200 p-6 rounded-lg hover:border-brand-red transition-colors duration-300 hover:shadow-lg">
                   <div className="flex items-start">
                     <div className="bg-brand-red/10 p-3 rounded-lg mr-4">
                       <FaPhone className="text-2xl text-brand-red" />
@@ -150,7 +178,7 @@ export default function ContactoPage() {
                   </div>
                 </div>
                 
-                <div className="border border-gray-200 p-6 rounded-lg hover:border-brand-red transition-colors duration-300">
+                <div className="border border-gray-200 p-6 rounded-lg hover:border-brand-red transition-colors duration-300 hover:shadow-lg">
                   <div className="flex items-start">
                     <div className="bg-brand-red/10 p-3 rounded-lg mr-4">
                       <FaEnvelope className="text-2xl text-brand-red" />
@@ -168,7 +196,7 @@ export default function ContactoPage() {
                   </div>
                 </div>
                 
-                <div className="border border-gray-200 p-6 rounded-lg hover:border-brand-red transition-colors duration-300">
+                <div className="border border-gray-200 p-6 rounded-lg hover:border-brand-red transition-colors duration-300 hover:shadow-lg">
                   <div className="flex items-start">
                     <div className="bg-brand-red/10 p-3 rounded-lg mr-4">
                       <FaClock className="text-2xl text-brand-red" />
@@ -183,26 +211,11 @@ export default function ContactoPage() {
                     </div>
                   </div>
                 </div>
-                
-                <div className="hidden lg:block border border-gray-200 p-6 rounded-lg bg-gray-50">
-                  <div className="text-center">
-                    <h3 className="font-oswald text-xl font-bold mb-3 text-black">Guarda nuestro contacto</h3>
-                    <div className="bg-white p-4 inline-block rounded-lg border border-gray-200 shadow-sm">
-                      <div className="w-32 h-32 bg-gray-200 flex items-center justify-center mb-3 mx-auto">
-                        <div className="text-center">
-                          <div className="font-bold text-brand-red text-2xl mb-1">JGA</div>
-                          <div className="text-xs text-gray-600 uppercase font-bold">ESCANEA</div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-600 font-medium">Escanea para guardar nuestro contacto directo</p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
 
             {/* COLUMNA DERECHA: FORMULARIO */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2 bg-gray-50 p-8 rounded-2xl border border-gray-200 shadow-inner">
               <h2 className="font-oswald text-3xl font-bold mb-8 text-black">
                 SOLICITUD DE <span className="text-brand-red">COTIZACIÓN</span>
               </h2>
@@ -210,18 +223,18 @@ export default function ContactoPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-gray-800 mb-2 font-bold">Nombre completo *</label>
+                    <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Nombre completo *</label>
                     <input
                       type="text" name="nombre" value={formData.nombre} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                       placeholder="Ej: Juan Pérez"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-800 mb-2 font-bold">Empresa / Institución *</label>
+                    <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Empresa / Institución *</label>
                     <input
                       type="text" name="empresa" value={formData.empresa} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                       placeholder="Ej: Planta Automotriz XYZ"
                     />
                   </div>
@@ -229,28 +242,28 @@ export default function ContactoPage() {
                 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-gray-800 mb-2 font-bold">Email *</label>
+                    <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Email *</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                       placeholder="ejemplo@empresa.com"
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-800 mb-2 font-bold">Teléfono *</label>
+                    <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Teléfono *</label>
                     <input
                       type="tel" name="telefono" value={formData.telefono} onChange={handleChange} required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                       placeholder="55 1234 5678"
                     />
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-gray-800 mb-2 font-bold">Tipo de Industria *</label>
+                  <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Tipo de Industria *</label>
                   <select
                     name="industria" value={formData.industria} onChange={handleChange} required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                   >
                     <option value="">Selecciona tu industria</option>
                     <option value="escuela">Escuela / Institución Educativa</option>
@@ -265,10 +278,10 @@ export default function ContactoPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-800 mb-2 font-bold">Cantidad aproximada de puertas *</label>
+                  <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Cantidad aproximada de puertas *</label>
                   <select
                     name="cantidadPuertas" value={formData.cantidadPuertas} onChange={handleChange} required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                   >
                     <option value="">Selecciona un rango</option>
                     <option value="1-10">1 - 10 puertas</option>
@@ -280,37 +293,37 @@ export default function ContactoPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-800 mb-2 font-bold">¿Tienes planos o especificaciones técnicas?</label>
-                  <div className="flex space-x-4">
+                  <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">¿Tienes planos o especificaciones?</label>
+                  <div className="flex space-x-4 bg-white p-3 rounded-lg border border-gray-300 shadow-sm">
                     <label className="flex items-center text-gray-900 cursor-pointer">
-                      <input type="radio" name="tienePlanos" value="si" checked={formData.tienePlanos === 'si'} onChange={handleChange} className="mr-2" />
+                      <input type="radio" name="tienePlanos" value="si" checked={formData.tienePlanos === 'si'} onChange={handleChange} className="mr-2 h-4 w-4 text-brand-red focus:ring-brand-red" />
                       Sí, tengo planos
                     </label>
                     <label className="flex items-center text-gray-900 cursor-pointer">
-                      <input type="radio" name="tienePlanos" value="no" checked={formData.tienePlanos === 'no'} onChange={handleChange} className="mr-2" />
+                      <input type="radio" name="tienePlanos" value="no" checked={formData.tienePlanos === 'no'} onChange={handleChange} className="mr-2 h-4 w-4 text-brand-red focus:ring-brand-red" />
                       No, necesito asesoría
                     </label>
                   </div>
                 </div>
                 
                 <div>
-                  <label className="block text-gray-800 mb-2 font-bold">Mensaje adicional o especificaciones especiales</label>
+                  <label className="block text-gray-800 mb-2 font-bold text-sm uppercase">Mensaje adicional</label>
                   <textarea
                     name="mensaje" value={formData.mensaje} onChange={handleChange} rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-red text-black bg-white shadow-sm"
                     placeholder="Describe tu proyecto, colores especiales, medidas no estándar, etc."
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
-                  className="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] font-oswald shadow-lg"
+                  className="w-full bg-brand-red hover:bg-red-700 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase tracking-wider transition-all duration-300 transform hover:scale-[1.02] font-oswald shadow-lg flex items-center justify-center gap-2"
                 >
-                  SOLICITAR COTIZACIÓN POR WHATSAPP
+                  <FaWhatsapp className="text-xl" /> SOLICITAR COTIZACIÓN
                 </button>
                 
-                <p className="text-sm text-gray-500 text-center font-medium">
-                  * Te enviaremos una cotización formal con especificaciones técnicas en menos de 2 horas hábiles
+                <p className="text-xs text-gray-500 text-center font-medium mt-4">
+                  * Te enviaremos una cotización formal en PDF con especificaciones técnicas en menos de 2 horas hábiles.
                 </p>
               </form>
             </div>
@@ -318,7 +331,7 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 3: UBICACIÓN FÍSICA */}
+      {/* SECCIÓN 3: UBICACIÓN FÍSICA + MAPA INTERACTIVO */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -331,16 +344,20 @@ export default function ContactoPage() {
           </div>
           
           <div className="bg-white rounded-xl overflow-hidden shadow-2xl border border-gray-200">
-            <div className="h-96 bg-gray-200 relative">
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800">
-                <div className="text-center text-white p-8">
-                  <FaMapMarkerAlt className="text-5xl mx-auto mb-4 text-brand-red" />
-                  <h3 className="font-oswald text-2xl mb-2">Ubicación Exacta</h3>
-                  <p className="text-gray-300 max-w-md mx-auto">Fábrica JGA México - Chicoloapan, Estado de México</p>
-                  <div className="mt-4 inline-block bg-brand-red/20 px-4 py-2 rounded-full">
-                    <span className="text-sm">Coordenadas: 19.4167° N, 98.9000° W</span>
-                  </div>
-                </div>
+            {/* MAPA GOOGLE REAL */}
+            <div className="h-96 w-full bg-gray-200 relative">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.5345722745366!2d-98.90218862412563!3d19.41666678187311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI1JzAwLjAiTiA5OMKwNTQnMDAuMCJX!5e0!3m2!1ses-419!2smx!4v1689200000000!5m2!1ses-419!2smx"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen={true}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Mapa Fábrica JGA Lockers"
+              ></iframe>
+              <div className="absolute top-4 left-4 bg-white p-2 rounded shadow-md text-xs font-bold text-black border border-gray-300">
+                <FaMapMarkerAlt className="inline text-brand-red mr-1" /> Planta Chicoloapan
               </div>
             </div>
             
@@ -354,22 +371,22 @@ export default function ContactoPage() {
                   <div className="space-y-2 text-gray-700">
                     <p className="font-bold text-lg">Calle Reyes de Argón Smz 20 Mz 1 Lote 3 Vivienda C</p>
                     <p>Chicoloapan, Estado de México, C.P. 56383</p>
-                    <p className="mt-4 text-sm text-gray-600 italic">
+                    <p className="mt-4 text-sm text-gray-600 italic bg-gray-100 p-3 rounded-lg border-l-4 border-brand-red">
                       <strong>Instrucciones:</strong> A 15 minutos de la Autopista México-Puebla, salida Chicoloapan. Planta industrial con letrero JGA visible.
                     </p>
                   </div>
                 </div>
                 
-                <div className="bg-brand-red/5 p-6 rounded-lg border border-brand-red/20">
-                  <h3 className="font-oswald text-2xl font-bold mb-4 text-black uppercase">¡Visítanos!</h3>
-                  <p className="text-gray-700 mb-4 font-bold">"Ven a ver tus lockers en proceso de fabricación"</p>
-                  <p className="text-gray-600 mb-4">Coordina una cita para visitar nuestra planta, ver nuestro proceso industrial y revisar muestras físicas de materiales y acabados.</p>
+                <div className="bg-brand-red/5 p-6 rounded-lg border border-brand-red/20 flex flex-col justify-center">
+                  <h3 className="font-oswald text-2xl font-bold mb-2 text-black uppercase">¡Visítanos!</h3>
+                  <p className="text-gray-700 mb-4 font-bold text-lg">"Ven a ver tus lockers en proceso de fabricación"</p>
+                  <p className="text-gray-600 mb-6 text-sm">Coordina una cita para visitar nuestra planta, ver nuestro proceso industrial y revisar muestras físicas de materiales y acabados.</p>
                   <a 
                     href="https://wa.me/525518246146?text=Hola,%20quiero%20agendar%20una%20visita%20a%20su%20planta%20en%20Chicoloapan."
                     target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all"
+                    className="inline-flex items-center justify-center bg-brand-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md w-full"
                   >
-                    <FaWhatsapp className="mr-2" /> Agendar Visita a Planta
+                    <FaWhatsapp className="mr-2 text-xl" /> Agendar Visita a Planta
                   </a>
                 </div>
               </div>
@@ -378,8 +395,8 @@ export default function ContactoPage() {
         </div>
       </section>
 
-      {/* SECCIÓN 4: PREGUNTAS FRECUENTES */}
-      <section className="py-20 bg-white">
+      {/* SECCIÓN 4: PREGUNTAS FRECUENTES (FAQ) */}
+      <section className="py-20 bg-white border-t border-gray-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-oswald text-4xl md:text-5xl font-bold mb-6 text-black">
@@ -423,22 +440,22 @@ export default function ContactoPage() {
                 answer: "Sí, para clientes con planes de mantenimiento ofrecemos servicio de emergencia en CDMX y área metropolitana con respuesta en menos de 24 horas para reparaciones críticas."
               }
             ].map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-xl p-6 hover:border-brand-red transition-all duration-300 hover:shadow-lg">
+              <div key={index} className="border border-gray-200 rounded-xl p-6 hover:border-brand-red transition-all duration-300 hover:shadow-lg bg-white">
                 <div className="flex items-start mb-4">
                   <div className="bg-brand-red/10 p-3 rounded-lg mr-4">{faq.icon}</div>
                   <h3 className="font-oswald text-xl font-bold text-black">{faq.question}</h3>
                 </div>
-                <p className="text-gray-600">{faq.answer}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
               </div>
             ))}
           </div>
           
           <div className="text-center mt-12">
-            <p className="text-lg text-gray-700 mb-6">¿No encontraste respuesta a tu pregunta?</p>
+            <p className="text-lg text-gray-700 mb-6 font-medium">¿No encontraste respuesta a tu pregunta?</p>
             <a 
               href="https://wa.me/525518246146?text=Hola%20JGA,%20tengo%20una%20pregunta%20específica%20sobre..."
               target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center bg-brand-black hover:bg-gray-800 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all"
+              className="inline-flex items-center bg-gray-900 hover:bg-black text-white font-bold py-4 px-8 rounded-lg text-lg transition-all shadow-lg hover:shadow-xl"
             >
               <FaWhatsapp className="mr-3 text-xl" /> Preguntar Directamente por WhatsApp
             </a>

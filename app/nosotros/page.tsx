@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -14,21 +15,55 @@ import {
   FaPalette,
   FaTruck,
   FaHandshake,
-  FaBacteria,
   FaTemperatureHigh,
-  FaRocket,      // Nuevo import
-  FaInstagram,   // Nuevo import
-  FaFingerprint, // Nuevo import
-  FaLeaf,        // Nuevo import
-  FaHistory,     // Nuevo import
-  FaQuoteLeft    // Nuevo import
+  FaRocket,
+  FaInstagram,
+  FaFingerprint,
+  FaLeaf,
+  FaHistory,
+  FaQuoteLeft
 } from 'react-icons/fa';
 import { GiMetalPlate, GiWeight, GiPlasticDuck } from 'react-icons/gi'; 
 import { MdOutlineCleaningServices } from 'react-icons/md';
 
+// 1. METADATOS DE AUTORIDAD (SEO)
+export const metadata: Metadata = {
+  title: 'Nosotros | Fábrica de Lockers JGA México (Desde 2004)',
+  description: 'Conoce la historia de Lockers JGA. No somos revendedores, somos fabricantes en Chicoloapan. Más de 20 años forjando acero y PVC de alta resistencia.',
+  keywords: ['fabrica lockers mexico', 'historia lockers jga', 'fabricantes lockers chicoloapan', 'jose luis rosas marcos', 'proveedores de lockers'],
+};
+
 export default function NosotrosPage() {
+  
+  // 2. SCHEMA MARKUP: NEGOCIO LOCAL DE MANUFACTURA
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ManufacturingBusiness",
+    "name": "Lockers JGA México",
+    "legalName": "Lockers JGA S.A. de C.V.",
+    "foundingDate": "2004",
+    "founder": {
+      "@type": "Person",
+      "name": "José Luis Rosas Marcos"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Reyes de Argón Smz 20 Mz 1 Lote 3",
+      "addressLocality": "Chicoloapan",
+      "addressRegion": "Estado de México",
+      "addressCountry": "MX"
+    },
+    "description": "Fábrica de lockers metálicos y de PVC en México.",
+    "slogan": "No somos una bodega, somos una fábrica."
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Inyección de Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       
       {/* SECCIÓN 1: HERO DE IDENTIDAD (INTACTO) */}
       <div className="bg-black text-white py-20 md:py-32 relative overflow-hidden">
@@ -80,7 +115,7 @@ export default function NosotrosPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/catalogo"
-                className="px-8 py-3 bg-brand-red text-white font-bold rounded-lg hover:bg-red-700 transition-colors text-lg"
+                className="px-8 py-3 bg-brand-red text-white font-bold rounded-lg hover:bg-red-700 transition-colors text-lg flex items-center justify-center"
               >
                 VER NUESTRO ACERO Y PVC
               </Link>
@@ -97,7 +132,7 @@ export default function NosotrosPage() {
         </div>
       </div>
 
-      {/* SECCIÓN 2: HISTORIA DE ORIGEN (INTACTO) */}
+      {/* SECCIÓN 2: HISTORIA DE ORIGEN (OPTIMIZADA) */}
       <div className="bg-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -148,26 +183,27 @@ export default function NosotrosPage() {
               </div>
             </div>
             
-            {/* Imagen/Placeholder a la derecha */}
-            <div className="relative">
-              <img 
+            {/* Imagen optimizada a la derecha */}
+            <div className="relative h-96 w-full rounded-2xl overflow-hidden shadow-2xl">
+              <Image 
                 src="/images/nosotros/equipo-trabajo.jpg" 
-                alt="Equipo JGA México" 
-                className="w-full h-96 object-cover rounded-2xl"
+                alt="Equipo JGA México en Fábrica Chicoloapan" 
+                fill
+                className="object-cover"
               />
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-brand-red/10 rounded-full"></div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gray-900/10 rounded-full"></div>
+              <div className="absolute -top-6 -left-6 w-24 h-24 bg-brand-red/10 rounded-full z-0"></div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gray-900/10 rounded-full z-0"></div>
             </div>
           </div>
         </div>
       </div>
 
       {/* ========================================================================= */}
-      {/* 🟢 NUEVA SECCIÓN AGREGADA: TRAYECTORIA, GUERRA VS MINIFIX Y VISIÓN 2030 🟢 */}
+      {/* 🟢 NUEVA SECCIÓN: TRAYECTORIA, GUERRA VS MINIFIX Y VISIÓN 2030 🟢 */}
       {/* ========================================================================= */}
       <div className="bg-black text-white py-20 md:py-32 relative overflow-hidden border-t border-gray-800">
         {/* Fondo sutil */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        <div className="absolute inset-0 bg-gray-900 opacity-50"></div>
         
         <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           
@@ -284,11 +320,7 @@ export default function NosotrosPage() {
 
         </div>
       </div>
-      {/* ========================================================================= */}
-      {/* 🔴 FIN DE NUEVA SECCIÓN 🔴 */}
-      {/* ========================================================================= */}
-
-
+      
       {/* SECCIÓN 3: EL PROCESO "SIN SECRETOS" (INTACTO) */}
       <div className="bg-gray-50 py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -461,7 +493,7 @@ export default function NosotrosPage() {
         </div>
       </div>
 
-      {/* SECCIÓN 4: GALERÍA DE PROCESO INDUSTRIAL (INTACTO) */}
+      {/* SECCIÓN 4: GALERÍA DE PROCESO INDUSTRIAL (OPTIMIZADA) */}
       <div className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="text-center mb-12">
@@ -477,10 +509,11 @@ export default function NosotrosPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Foto 1: Soldadura */}
             <div className="relative h-64 rounded-xl overflow-hidden group">
-              <img 
+              <Image 
                 src="/images/nosotros/proceso-soldadura.jpg" 
-                alt="Proceso de soldadura industrial" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Proceso de soldadura robotizada de acero" 
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                 <div>
@@ -492,10 +525,11 @@ export default function NosotrosPage() {
             
             {/* Foto 2: Control calidad */}
             <div className="relative h-64 rounded-xl overflow-hidden group">
-              <img 
+              <Image 
                 src="/images/nosotros/control-calidad.jpg" 
-                alt="Control de calidad y calibre" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Control de calidad lockers JGA" 
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                 <div>
@@ -507,10 +541,11 @@ export default function NosotrosPage() {
             
             {/* Foto 3: Sellado */}
             <div className="relative h-64 rounded-xl overflow-hidden group">
-              <img 
+              <Image 
                 src="/images/nosotros/proceso-pintura.jpg" 
-                alt="Proceso de sellado PVC industrial" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Sellado aséptico de lockers PVC" 
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                 <div>
@@ -525,10 +560,11 @@ export default function NosotrosPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
             {/* Foto 4: Logística */}
             <div className="relative h-64 rounded-xl overflow-hidden group">
-              <img 
+              <Image 
                 src="/images/nosotros/flotilla-camiones.jpg" 
-                alt="Flotilla de camiones para entrega" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Flotilla de envíos JGA" 
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                 <div>
@@ -540,10 +576,11 @@ export default function NosotrosPage() {
             
             {/* Foto 5: Embalaje */}
             <div className="relative h-64 rounded-xl overflow-hidden group">
-              <img 
+              <Image 
                 src="/images/nosotros/embalaje.jpg" 
-                alt="Embalaje industrial protector" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="Embalaje de lockers industriales" 
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4">
                 <div>
@@ -641,14 +678,15 @@ export default function NosotrosPage() {
             </div>
           </div>
           
-          {/* Cita del fundador */}
+          {/* Cita del fundador (OPTIMIZADA) */}
           <div className="mt-20 bg-gradient-to-r from-brand-red/10 to-red-50 border border-brand-red/20 rounded-2xl p-8 md:p-12">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="md:w-1/4">
-                <img 
+              <div className="md:w-1/4 relative h-48 w-48 mx-auto">
+                <Image 
                   src="/images/nosotros/ceo.jpg" 
-                  alt="CEO Lockers JGA México" 
-                  className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full mx-auto border-4 border-white shadow-lg"
+                  alt="José Luis Rosas - Fundador JGA" 
+                  fill
+                  className="object-cover rounded-full border-4 border-white shadow-lg"
                 />
               </div>
               
@@ -670,7 +708,7 @@ export default function NosotrosPage() {
         </div>
       </div>
 
-      {/* SECCIÓN 6: DONDE NACEN LOS LOCKERS (INTACTO) */}
+      {/* SECCIÓN 6: DONDE NACEN LOS LOCKERS (OPTIMIZADA) */}
       <div className="bg-gray-900 text-white py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -760,12 +798,13 @@ export default function NosotrosPage() {
               </div>
             </div>
             
-            {/* Mapa a la derecha */}
-            <div className="relative">
-              <img 
+            {/* Imagen optimizada a la derecha */}
+            <div className="relative h-96 w-full rounded-2xl overflow-hidden shadow-2xl">
+              <Image 
                 src="/images/nosotros/fabrica-exterior.jpg" 
-                alt="Fábrica Lockers JGA México" 
-                className="w-full h-96 object-cover rounded-2xl"
+                alt="Fábrica Lockers JGA México exterior" 
+                fill
+                className="object-cover"
               />
               <div className="absolute -top-4 -left-4 w-20 h-20 bg-brand-red/10 rounded-full"></div>
               <div className="absolute -bottom-4 -right-4 w-28 h-28 bg-white/5 rounded-full"></div>
