@@ -1,66 +1,85 @@
 import { MetadataRoute } from 'next';
-// 👇 Importamos 'BlogPost' para que TypeScript sepa qué tipo de datos son
-import { getBlogPosts, BlogPost } from '../lib/contentful'; 
+// 👇 Importamos la interfaz BlogPost para que TypeScript no se queje
+import { getBlogPosts, BlogPost } from '../lib/contentful';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://lockersjgamexico.com';
 
-  // 👇 CORRECCIÓN AQUÍ: Le decimos explícitamente que es una lista de BlogPosts
-  let posts: BlogPost[] = [];
+  // 👇 CORRECCIÓN: Tipado explícito del array vacío
+  let blogPosts: BlogPost[] = [];
 
   try {
-    posts = await getBlogPosts();
+    blogPosts = await getBlogPosts();
   } catch (error) {
-    console.warn('No se pudieron cargar los posts para el sitemap:', error);
+    console.error("Error al obtener posts para el sitemap:", error);
+    // Si falla, se mantiene como array vacío pero tipado correctamente
+    blogPosts = [];
   }
 
-  // Mapeamos los posts dinámicos
-  const blogUrls = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.fields.slug}`,
-    lastModified: new Date(post.fields.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }));
+  // 2. Mapeamos los posts
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => {
+    // Lógica defensiva para la fecha
+    let dateValue = post.fields.date || post.sys.updatedAt;
+    let finalDate = new Date(); // Por defecto hoy
 
-  // Rutas estáticas (Las fijas de tu web)
-  const staticRoutes = [
+    try {
+      if (dateValue) {
+        const parsedDate = new Date(dateValue);
+        if (!isNaN(parsedDate.getTime())) {
+          finalDate = parsedDate;
+        }
+      }
+    } catch (e) {
+      console.warn(`Fecha inválida en post: ${post.fields.slug}, usando fecha actual.`);
+    }
+
+    return {
+      url: `${baseUrl}/blog/${post.fields.slug}`,
+      lastModified: finalDate,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    };
+  });
+
+  // 3. Rutas estáticas
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'yearly',
       priority: 1,
     },
     {
       url: `${baseUrl}/catalogo`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/servicios`,
       lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${baseUrl}/nosotros`,
       lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.5,
+      changeFrequency: 'yearly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/contacto`,
       lastModified: new Date(),
-      changeFrequency: 'yearly' as const,
-      priority: 0.6,
+      changeFrequency: 'yearly',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
   ];
 
-  return [...staticRoutes, ...blogUrls];
+  return [...staticRoutes, ...blogEntries];
 }
